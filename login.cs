@@ -53,7 +53,7 @@ namespace kursBd
 
                 if (emplRadio.Checked)
                 {
-                   
+                   fegefge
                 }
                 else if (managerRadio.Checked)
                 {
