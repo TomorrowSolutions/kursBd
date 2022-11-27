@@ -41,6 +41,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.dirRadio = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -55,7 +56,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Bold);
             this.label1.Location = new System.Drawing.Point(170, 71);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
@@ -66,7 +67,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.label2.Location = new System.Drawing.Point(131, 140);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(264, 20);
@@ -77,7 +78,7 @@
             // 
             this.managerRadio.AutoSize = true;
             this.managerRadio.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.managerRadio.Location = new System.Drawing.Point(135, 174);
+            this.managerRadio.Location = new System.Drawing.Point(72, 174);
             this.managerRadio.Name = "managerRadio";
             this.managerRadio.Size = new System.Drawing.Size(96, 20);
             this.managerRadio.TabIndex = 3;
@@ -89,7 +90,7 @@
             // 
             this.emplRadio.AutoSize = true;
             this.emplRadio.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.emplRadio.Location = new System.Drawing.Point(280, 174);
+            this.emplRadio.Location = new System.Drawing.Point(175, 174);
             this.emplRadio.Name = "emplRadio";
             this.emplRadio.Size = new System.Drawing.Size(99, 20);
             this.emplRadio.TabIndex = 4;
@@ -100,7 +101,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.label3.Location = new System.Drawing.Point(50, 225);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 20);
@@ -110,7 +111,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.label4.Location = new System.Drawing.Point(50, 261);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(72, 20);
@@ -130,7 +131,7 @@
             this.loginBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(188)))), ((int)(((byte)(156)))));
             this.loginBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.loginBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.loginBtn.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.loginBtn.Font = new System.Drawing.Font("Courier New", 10.2F, System.Drawing.FontStyle.Bold);
             this.loginBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
             this.loginBtn.Location = new System.Drawing.Point(168, 334);
             this.loginBtn.Name = "loginBtn";
@@ -152,7 +153,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Courier New", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.Font = new System.Drawing.Font("Courier New", 10.8F, System.Drawing.FontStyle.Bold);
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
             this.label5.Location = new System.Drawing.Point(9, 25);
             this.label5.Margin = new System.Windows.Forms.Padding(0);
@@ -163,6 +164,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.dirRadio);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.loginBtn);
             this.panel2.Controls.Add(this.emplRadio);
@@ -176,6 +178,18 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(500, 500);
             this.panel2.TabIndex = 10;
+            // 
+            // dirRadio
+            // 
+            this.dirRadio.AutoSize = true;
+            this.dirRadio.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dirRadio.Location = new System.Drawing.Point(296, 174);
+            this.dirRadio.Name = "dirRadio";
+            this.dirRadio.Size = new System.Drawing.Size(91, 20);
+            this.dirRadio.TabIndex = 9;
+            this.dirRadio.TabStop = true;
+            this.dirRadio.Text = "Директор";
+            this.dirRadio.UseVisualStyleBackColor = true;
             // 
             // login
             // 
@@ -212,6 +226,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.RadioButton dirRadio;
     }
 }
 

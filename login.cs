@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Npgsql;
@@ -20,11 +21,16 @@ namespace kursBd
         private string visitorConnString = string.Format("Server={0};Port={1};" +
                                                         "User Id={2};Password={3};Database={4};",
                                                         "localhost",5432,"visitor","1","dbKurs");
+        private string directorConnString = String.Empty;
         private NpgsqlConnection conn;
         private string query;
         private NpgsqlCommand cmd;
+        private void openManPage() => Application.Run(new managerPanel());
+        private void openEmplPage() => Application.Run(new employeePanel());
+        private void openDirPage() => Application.Run(new directorPanel());
         private void loginBtn_Click(object sender, EventArgs e)
         {
+            Thread thr;
 
             if (emplRadio.Checked)
             {
@@ -36,40 +42,90 @@ namespace kursBd
                 query = String.Format("select exists(select 1 from \"{0}\" WHERE login='{1}' and \"password\"='{2}')",
                                    "Managers", loginTb.Text, passwordTb.Text);
             }
+            else if (dirRadio.Checked)
+            {
+                directorConnString= string.Format("Server={0};Port={1};" +
+                                                        "User Id={2};Password={3};Database={4};",
+                                                        "localhost", 5432, loginTb.Text, passwordTb.Text, "dbKurs");
+                query = "select * from \"Managers\"";
+            }
             else
             {
                 MessageBox.Show("Не выбран тип учетной записи!");
                 return;
             }
-
-            conn=new NpgsqlConnection(visitorConnString);
-            try
+            if (emplRadio.Checked | managerRadio.Checked)
             {
-                conn.Open();                
-                cmd=new NpgsqlCommand(query,conn);
-                bool isLogin = bool.Parse( cmd.ExecuteScalar().ToString());                
-                conn.Close();
-                MessageBox.Show((isLogin ? "Авторизация прошла успешно.":"Не удалось авторизоваться."));
+                conn = new NpgsqlConnection(visitorConnString);
+                try
+                {
+                    conn.Open();
+                    cmd = new NpgsqlCommand(query, conn);
+                    bool isLogin = bool.Parse(cmd.ExecuteScalar().ToString());
+                    conn.Close();
+                    MessageBox.Show(isLogin ? "Авторизация прошла успешно." : "Не удалось авторизоваться.");
+                    if (isLogin==false)
+                    {
+                        return;
+                    }
+                    if (emplRadio.Checked)
+                    {
+                       employeePanel.emplConnString= string.Format("Server={0};Port={1};" +
+                                                        "User Id={2};Password={3};Database={4};",
+                                                        "localhost", 5432, "employees", "empl", "dbKurs");
+                        this.Close();
+                        thr= new Thread(openEmplPage);
+                        thr.SetApartmentState(ApartmentState.STA);
+                        thr.Start();
 
-                if (emplRadio.Checked)
-                {
-                   
+                    }
+                    else if (managerRadio.Checked)
+                    {
+                        managerPanel.manConnString = string.Format("Server={0};Port={1};" +
+                                                        "User Id={2};Password={3};Database={4};",
+                                                        "localhost", 5432, "managers", "man", "dbKurs");
+                        this.Close();
+                        thr = new Thread(openManPage);
+                        thr.SetApartmentState(ApartmentState.STA);
+                        thr.Start();
+                    }
                 }
-                else if (managerRadio.Checked)
+                catch (Exception ex)
                 {
-                    
+                    // MessageBox.Show("Ошибка!" + System.Environment.NewLine + ex.Message);
+                    MessageBox.Show("Ошибка!\nПроверьте правильность введенных данныхю.");
+                    return;
                 }
             }
-            catch (Exception ex)
+            else if (dirRadio.Checked)
             {
-                MessageBox.Show("Ошибка!"+System.Environment.NewLine+ex.Message);
+                conn= new NpgsqlConnection(directorConnString);
+                try
+                {
+                    conn.Open();
+                    cmd= new NpgsqlCommand(query, conn);
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+
+                    directorPanel.dirConnString = directorConnString;
+                    this.Close();
+                    thr = new Thread(openDirPage);
+                    thr.SetApartmentState(ApartmentState.STA);
+                    thr.Start();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка!\nПроверьте правильность введенных данныхю.");
+                    return ;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Не удалось выполнить подключение.");
+                return ;
             }
             
-        }
-
-        private void closeBtn_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
+            
         }
     }
 }

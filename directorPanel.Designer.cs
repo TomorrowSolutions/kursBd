@@ -1,6 +1,6 @@
 ﻿namespace kursBd
 {
-    partial class managerPanel
+    partial class directorPanel
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,14 @@
         {
             this.SuspendLayout();
             // 
-            // managerPanel
+            // directorPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "managerPanel";
-            this.Text = "Панель менеджера";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.managerPanel_FormClosing);
+            this.Name = "directorPanel";
+            this.Text = "directorPanel";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.directorPanel_FormClosing);
             this.ResumeLayout(false);
 
         }

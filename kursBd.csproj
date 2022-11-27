@@ -94,6 +94,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="directorPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="directorPanel.Designer.cs">
+      <DependentUpon>directorPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="employeePanel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,8 +120,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="directorPanel.resx">
+      <DependentUpon>directorPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="employeePanel.resx">
       <DependentUpon>employeePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="login.en.resx">
+      <DependentUpon>login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="managerPanel.resx">
       <DependentUpon>managerPanel.cs</DependentUpon>

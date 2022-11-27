@@ -16,5 +16,13 @@ namespace kursBd
         {
             InitializeComponent();
         }
+        public static string manConnString;
+        public static string manLogin;
+        public static string manPassword;
+
+        private void managerPanel_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
+        }
     }
 }

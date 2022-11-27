@@ -16,5 +16,8 @@ namespace kursBd
         {
             InitializeComponent();
         }
+        public static string emplConnString;
+        public static string login;
+        public static string pass;
     }
 }
