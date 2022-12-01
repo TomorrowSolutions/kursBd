@@ -25,21 +25,21 @@ namespace kursBd
         private NpgsqlConnection conn;
         private string query;
         private NpgsqlCommand cmd;
-        private void openManPage() => Application.Run(new managerPanel());
-        private void openEmplPage() => Application.Run(new employeePanel());
-        private void openDirPage() => Application.Run(new directorPanel());
+        private void openManPage(string conn, int id) => Application.Run(new managerPanel(conn,id));
+        private void openEmplPage(string conn,int id) => Application.Run(new employeePanel(conn,id));
+        private void openDirPage(string conn) => Application.Run(new directorPanel(conn));
         private void loginBtn_Click(object sender, EventArgs e)
         {
             Thread thr;
 
             if (emplRadio.Checked)
             {
-                query = String.Format("select exists(select 1 from \"{0}\" WHERE login='{1}' and \"password\"='{2}')",
+                query = String.Format("select  \"id_empl\" from \"{0}\" WHERE login='{1}' and \"password\"='{2}'",
                                     "Employees", loginTb.Text, passwordTb.Text);
             }
             else if (managerRadio.Checked)
             {
-                query = String.Format("select exists(select 1 from \"{0}\" WHERE login='{1}' and \"password\"='{2}')",
+                query = String.Format("select \"id_man\" from \"{0}\" WHERE login='{1}' and \"password\"='{2}'",
                                    "Managers", loginTb.Text, passwordTb.Text);
             }
             else if (dirRadio.Checked)
@@ -61,7 +61,8 @@ namespace kursBd
                 {
                     conn.Open();
                     cmd = new NpgsqlCommand(query, conn);
-                    bool isLogin = bool.Parse(cmd.ExecuteScalar().ToString());
+                    int id;
+                    bool isLogin = int.TryParse(cmd.ExecuteScalar().ToString(), out id) ;
                     conn.Close();
                     MessageBox.Show(isLogin ? "Авторизация прошла успешно." : "Не удалось авторизоваться.");
                     if (isLogin==false)
@@ -69,23 +70,20 @@ namespace kursBd
                         return;
                     }
                     if (emplRadio.Checked)
-                    {
-                       employeePanel.emplConnString= string.Format("Server={0};Port={1};" +
-                                                        "User Id={2};Password={3};Database={4};",
-                                                        "localhost", 5432, "employees", "empl", "dbKurs");
+                    {                       
                         this.Close();
-                        thr= new Thread(openEmplPage);
+                        thr= new Thread(()=>openEmplPage(string.Format("Server={0};Port={1};" +
+                                                        "User Id={2};Password={3};Database={4};",
+                                                        "localhost", 5432, "employees", "empl", "dbKurs"),id));
                         thr.SetApartmentState(ApartmentState.STA);
                         thr.Start();
-
                     }
                     else if (managerRadio.Checked)
-                    {
-                        managerPanel.manConnString = string.Format("Server={0};Port={1};" +
-                                                        "User Id={2};Password={3};Database={4};",
-                                                        "localhost", 5432, "managers", "man", "dbKurs");
+                    {                        
                         this.Close();
-                        thr = new Thread(openManPage);
+                        thr = new Thread(() => openManPage(string.Format("Server={0};Port={1};" +
+                                                        "User Id={2};Password={3};Database={4};",
+                                                        "localhost", 5432, "managers", "man", "dbKurs"),id));
                         thr.SetApartmentState(ApartmentState.STA);
                         thr.Start();
                     }
@@ -106,10 +104,9 @@ namespace kursBd
                     cmd= new NpgsqlCommand(query, conn);
                     cmd.ExecuteNonQuery();
                     conn.Close();
-
-                    directorPanel.dirConnString = directorConnString;
+                    
                     this.Close();
-                    thr = new Thread(openDirPage);
+                    thr = new Thread(()=>openDirPage(directorConnString));
                     thr.SetApartmentState(ApartmentState.STA);
                     thr.Start();
                 }

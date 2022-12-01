@@ -37,6 +37,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "employeePanel";
             this.Text = "employeePanel";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.employeePanel_FormClosing);
             this.ResumeLayout(false);
 
         }

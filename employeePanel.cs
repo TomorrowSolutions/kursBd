@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,12 +13,28 @@ namespace kursBd
 {
     public partial class employeePanel : Form
     {
-        public employeePanel()
+        private NpgsqlConnection conn;
+        private string query;
+        private NpgsqlCommand cmd;
+        readonly private int emplId;
+
+        public employeePanel(string connect, int id)
         {
             InitializeComponent();
+            conn = new NpgsqlConnection(connect);
+            emplId=id;
         }
-        public static string emplConnString;
-        public static string login;
-        public static string pass;
+        
+        private void employeePanel_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Вы действительно хотите выйти?\nНесохраненные изменения будут утеряны", "Выход", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                e.Cancel = false;
+            }
+        }
     }
 }
