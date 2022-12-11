@@ -28,14 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(directorPanel));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.viewTab = new System.Windows.Forms.TabPage();
+            this.button5 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel3 = new System.Windows.Forms.Panel();
             this.profitLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -74,9 +71,52 @@
             this.selectManBtn = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label6 = new System.Windows.Forms.Label();
+            this.emplTab = new System.Windows.Forms.TabPage();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.delEmpl = new System.Windows.Forms.Button();
+            this.updEmpl = new System.Windows.Forms.Button();
+            this.addEmpl = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.label21 = new System.Windows.Forms.Label();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.label18 = new System.Windows.Forms.Label();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.emplPas = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.emplLog = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.emplEdu = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.emplPatr = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.emplSName = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.emplName = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.selectEmpl = new System.Windows.Forms.Button();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.label27 = new System.Windows.Forms.Label();
+            this.posSalPage = new System.Windows.Forms.TabPage();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.delPos = new System.Windows.Forms.Button();
+            this.updPos = new System.Windows.Forms.Button();
+            this.addPos = new System.Windows.Forms.Button();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.label37 = new System.Windows.Forms.Label();
+            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.posName = new System.Windows.Forms.TextBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.posSal = new System.Windows.Forms.TextBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.selectPos = new System.Windows.Forms.Button();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.label41 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.viewTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -84,12 +124,23 @@
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.emplTab.SuspendLayout();
+            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.posSalPage.SuspendLayout();
+            this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.viewTab);
             this.tabControl1.Controls.Add(this.manTab);
+            this.tabControl1.Controls.Add(this.emplTab);
+            this.tabControl1.Controls.Add(this.posSalPage);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Multiline = true;
@@ -101,8 +152,8 @@
             // viewTab
             // 
             this.viewTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(218)))), ((int)(((byte)(226)))));
+            this.viewTab.Controls.Add(this.button5);
             this.viewTab.Controls.Add(this.label5);
-            this.viewTab.Controls.Add(this.chart1);
             this.viewTab.Controls.Add(this.panel3);
             this.viewTab.Controls.Add(this.panel2);
             this.viewTab.Controls.Add(this.panel1);
@@ -113,6 +164,22 @@
             this.viewTab.Size = new System.Drawing.Size(1254, 564);
             this.viewTab.TabIndex = 0;
             this.viewTab.Text = "Обзор";
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(173)))), ((int)(((byte)(169)))));
+            this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
+            this.button5.Location = new System.Drawing.Point(898, 418);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(300, 100);
+            this.button5.TabIndex = 6;
+            this.button5.Text = "Обновить данные";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // label5
             // 
@@ -125,30 +192,12 @@
             this.label5.TabIndex = 5;
             this.label5.Text = "Охраняем ваше время";
             // 
-            // chart1
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(486, 6);
-            this.chart1.Name = "chart1";
-            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series1.Legend = "Legend1";
-            series1.Name = "clientsSeries";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(619, 300);
-            this.chart1.TabIndex = 4;
-            this.chart1.Text = "chart1";
-            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.DeepPink;
             this.panel3.Controls.Add(this.profitLabel);
             this.panel3.Controls.Add(this.label4);
-            this.panel3.Location = new System.Drawing.Point(887, 322);
+            this.panel3.Location = new System.Drawing.Point(898, 142);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(300, 200);
             this.panel3.TabIndex = 3;
@@ -158,7 +207,7 @@
             this.profitLabel.AutoSize = true;
             this.profitLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.profitLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.profitLabel.Location = new System.Drawing.Point(32, 118);
+            this.profitLabel.Location = new System.Drawing.Point(3, 118);
             this.profitLabel.Name = "profitLabel";
             this.profitLabel.Size = new System.Drawing.Size(102, 25);
             this.profitLabel.TabIndex = 2;
@@ -169,18 +218,18 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.label4.Location = new System.Drawing.Point(32, 42);
+            this.label4.Location = new System.Drawing.Point(3, 43);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(102, 25);
+            this.label4.Size = new System.Drawing.Size(243, 25);
             this.label4.TabIndex = 1;
-            this.label4.Text = "Прибыль";
+            this.label4.Text = "Прибыль от договоров";
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.DodgerBlue;
             this.panel2.Controls.Add(this.orderLabel);
             this.panel2.Controls.Add(this.label3);
-            this.panel2.Location = new System.Drawing.Point(486, 322);
+            this.panel2.Location = new System.Drawing.Point(479, 142);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(300, 200);
             this.panel2.TabIndex = 3;
@@ -190,7 +239,7 @@
             this.orderLabel.AutoSize = true;
             this.orderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.orderLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.orderLabel.Location = new System.Drawing.Point(34, 118);
+            this.orderLabel.Location = new System.Drawing.Point(3, 118);
             this.orderLabel.Name = "orderLabel";
             this.orderLabel.Size = new System.Drawing.Size(121, 25);
             this.orderLabel.TabIndex = 2;
@@ -201,18 +250,18 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.label3.Location = new System.Drawing.Point(34, 33);
+            this.label3.Location = new System.Drawing.Point(3, 43);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(121, 25);
+            this.label3.Size = new System.Drawing.Size(125, 25);
             this.label3.TabIndex = 1;
-            this.label3.Text = "Договоров";
+            this.label3.Text = "Заключено";
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.ForestGreen;
             this.panel1.Controls.Add(this.emplLabel);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(45, 322);
+            this.panel1.Location = new System.Drawing.Point(45, 142);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(300, 200);
             this.panel1.TabIndex = 2;
@@ -222,7 +271,7 @@
             this.emplLabel.AutoSize = true;
             this.emplLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.emplLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.emplLabel.Location = new System.Drawing.Point(24, 118);
+            this.emplLabel.Location = new System.Drawing.Point(3, 118);
             this.emplLabel.Name = "emplLabel";
             this.emplLabel.Size = new System.Drawing.Size(144, 25);
             this.emplLabel.TabIndex = 2;
@@ -233,11 +282,11 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(242)))), ((int)(((byte)(246)))));
-            this.label2.Location = new System.Drawing.Point(24, 26);
+            this.label2.Location = new System.Drawing.Point(3, 33);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(144, 25);
+            this.label2.Size = new System.Drawing.Size(261, 25);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Сотрудников";
+            this.label2.Text = "В орагнизации работает";
             // 
             // label1
             // 
@@ -277,6 +326,7 @@
             this.delManBtn.TabIndex = 29;
             this.delManBtn.Text = "Удалить";
             this.delManBtn.UseVisualStyleBackColor = true;
+            this.delManBtn.Click += new System.EventHandler(this.delManBtn_Click);
             // 
             // updateManBtn
             // 
@@ -286,6 +336,7 @@
             this.updateManBtn.TabIndex = 28;
             this.updateManBtn.Text = "Обновить";
             this.updateManBtn.UseVisualStyleBackColor = true;
+            this.updateManBtn.Click += new System.EventHandler(this.updateManBtn_Click);
             // 
             // addManBtn
             // 
@@ -369,6 +420,7 @@
             this.passTb.Name = "passTb";
             this.passTb.Size = new System.Drawing.Size(286, 22);
             this.passTb.TabIndex = 22;
+            this.passTb.UseSystemPasswordChar = true;
             // 
             // label14
             // 
@@ -518,6 +570,7 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(601, 408);
             this.dataGridView1.TabIndex = 2;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // label6
             // 
@@ -529,6 +582,454 @@
             this.label6.Size = new System.Drawing.Size(607, 35);
             this.label6.TabIndex = 1;
             this.label6.Text = "Просмотр информации из базы данных\r\n";
+            // 
+            // emplTab
+            // 
+            this.emplTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(218)))), ((int)(((byte)(226)))));
+            this.emplTab.Controls.Add(this.label28);
+            this.emplTab.Controls.Add(this.label29);
+            this.emplTab.Controls.Add(this.delEmpl);
+            this.emplTab.Controls.Add(this.updEmpl);
+            this.emplTab.Controls.Add(this.addEmpl);
+            this.emplTab.Controls.Add(this.panel5);
+            this.emplTab.Controls.Add(this.selectEmpl);
+            this.emplTab.Controls.Add(this.dataGridView2);
+            this.emplTab.Controls.Add(this.label27);
+            this.emplTab.Location = new System.Drawing.Point(4, 25);
+            this.emplTab.Name = "emplTab";
+            this.emplTab.Size = new System.Drawing.Size(1254, 564);
+            this.emplTab.TabIndex = 2;
+            this.emplTab.Text = "Сотрудники";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(694, 60);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(529, 32);
+            this.label28.TabIndex = 38;
+            this.label28.Text = "Для добавления, удаления и изменения информации используйте форму ниже.\r\nПоля Фам" +
+    "илия, Отчество, Дата начала работы необязательны для заполнения.\r\n";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(75)))), ((int)(((byte)(144)))));
+            this.label29.Location = new System.Drawing.Point(691, 14);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(375, 35);
+            this.label29.TabIndex = 37;
+            this.label29.Text = "Изменение информации";
+            // 
+            // delEmpl
+            // 
+            this.delEmpl.Location = new System.Drawing.Point(533, 486);
+            this.delEmpl.Name = "delEmpl";
+            this.delEmpl.Size = new System.Drawing.Size(100, 50);
+            this.delEmpl.TabIndex = 36;
+            this.delEmpl.Text = "Удалить";
+            this.delEmpl.UseVisualStyleBackColor = true;
+            this.delEmpl.Click += new System.EventHandler(this.delEmpl_Click);
+            // 
+            // updEmpl
+            // 
+            this.updEmpl.Location = new System.Drawing.Point(427, 486);
+            this.updEmpl.Name = "updEmpl";
+            this.updEmpl.Size = new System.Drawing.Size(100, 50);
+            this.updEmpl.TabIndex = 35;
+            this.updEmpl.Text = "Обновить";
+            this.updEmpl.UseVisualStyleBackColor = true;
+            this.updEmpl.Click += new System.EventHandler(this.updEmpl_Click);
+            // 
+            // addEmpl
+            // 
+            this.addEmpl.Location = new System.Drawing.Point(321, 486);
+            this.addEmpl.Name = "addEmpl";
+            this.addEmpl.Size = new System.Drawing.Size(100, 50);
+            this.addEmpl.TabIndex = 34;
+            this.addEmpl.Text = "Добавить";
+            this.addEmpl.UseVisualStyleBackColor = true;
+            this.addEmpl.Click += new System.EventHandler(this.addEmpl_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.label21);
+            this.panel5.Controls.Add(this.numericUpDown3);
+            this.panel5.Controls.Add(this.label18);
+            this.panel5.Controls.Add(this.dateTimePicker2);
+            this.panel5.Controls.Add(this.emplPas);
+            this.panel5.Controls.Add(this.label19);
+            this.panel5.Controls.Add(this.emplLog);
+            this.panel5.Controls.Add(this.label20);
+            this.panel5.Controls.Add(this.emplEdu);
+            this.panel5.Controls.Add(this.label22);
+            this.panel5.Controls.Add(this.label23);
+            this.panel5.Controls.Add(this.numericUpDown2);
+            this.panel5.Controls.Add(this.emplPatr);
+            this.panel5.Controls.Add(this.label24);
+            this.panel5.Controls.Add(this.emplSName);
+            this.panel5.Controls.Add(this.label25);
+            this.panel5.Controls.Add(this.emplName);
+            this.panel5.Controls.Add(this.label26);
+            this.panel5.Location = new System.Drawing.Point(697, 109);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(549, 447);
+            this.panel5.TabIndex = 33;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label21.Location = new System.Drawing.Point(15, 77);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(125, 20);
+            this.label21.TabIndex = 27;
+            this.label21.Text = "ID Должности";
+            // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.Location = new System.Drawing.Point(150, 78);
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(58, 22);
+            this.numericUpDown3.TabIndex = 26;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label18.Location = new System.Drawing.Point(15, 399);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(184, 20);
+            this.label18.TabIndex = 25;
+            this.label18.Text = "Дата начала работы";
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.CustomFormat = "dd/MM/yyyy";
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker2.Location = new System.Drawing.Point(344, 397);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker2.TabIndex = 24;
+            // 
+            // emplPas
+            // 
+            this.emplPas.Location = new System.Drawing.Point(258, 361);
+            this.emplPas.Name = "emplPas";
+            this.emplPas.Size = new System.Drawing.Size(286, 22);
+            this.emplPas.TabIndex = 22;
+            this.emplPas.UseSystemPasswordChar = true;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label19.Location = new System.Drawing.Point(15, 363);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(72, 20);
+            this.label19.TabIndex = 23;
+            this.label19.Text = "Пароль";
+            // 
+            // emplLog
+            // 
+            this.emplLog.Location = new System.Drawing.Point(258, 318);
+            this.emplLog.Name = "emplLog";
+            this.emplLog.Size = new System.Drawing.Size(286, 22);
+            this.emplLog.TabIndex = 20;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label20.Location = new System.Drawing.Point(15, 320);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(59, 20);
+            this.label20.TabIndex = 21;
+            this.label20.Text = "Логин";
+            // 
+            // emplEdu
+            // 
+            this.emplEdu.Location = new System.Drawing.Point(258, 275);
+            this.emplEdu.Name = "emplEdu";
+            this.emplEdu.Size = new System.Drawing.Size(286, 22);
+            this.emplEdu.TabIndex = 16;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label22.Location = new System.Drawing.Point(15, 275);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(121, 20);
+            this.label22.TabIndex = 17;
+            this.label22.Text = "Образование";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label23.Location = new System.Drawing.Point(15, 30);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(132, 20);
+            this.label23.TabIndex = 15;
+            this.label23.Text = "ID Сотрудника";
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(150, 31);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(58, 22);
+            this.numericUpDown2.TabIndex = 14;
+            // 
+            // emplPatr
+            // 
+            this.emplPatr.Location = new System.Drawing.Point(258, 230);
+            this.emplPatr.Name = "emplPatr";
+            this.emplPatr.Size = new System.Drawing.Size(286, 22);
+            this.emplPatr.TabIndex = 12;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label24.Location = new System.Drawing.Point(15, 230);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(91, 20);
+            this.label24.TabIndex = 13;
+            this.label24.Text = "Отчество";
+            // 
+            // emplSName
+            // 
+            this.emplSName.Location = new System.Drawing.Point(258, 148);
+            this.emplSName.Name = "emplSName";
+            this.emplSName.Size = new System.Drawing.Size(286, 22);
+            this.emplSName.TabIndex = 10;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label25.Location = new System.Drawing.Point(15, 148);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(87, 20);
+            this.label25.TabIndex = 11;
+            this.label25.Text = "Фамилия";
+            // 
+            // emplName
+            // 
+            this.emplName.Location = new System.Drawing.Point(258, 191);
+            this.emplName.Name = "emplName";
+            this.emplName.Size = new System.Drawing.Size(286, 22);
+            this.emplName.TabIndex = 8;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label26.Location = new System.Drawing.Point(15, 191);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(42, 20);
+            this.label26.TabIndex = 9;
+            this.label26.Text = "Имя";
+            // 
+            // selectEmpl
+            // 
+            this.selectEmpl.Location = new System.Drawing.Point(215, 486);
+            this.selectEmpl.Name = "selectEmpl";
+            this.selectEmpl.Size = new System.Drawing.Size(100, 50);
+            this.selectEmpl.TabIndex = 32;
+            this.selectEmpl.Text = "Выбрать данные";
+            this.selectEmpl.UseVisualStyleBackColor = true;
+            this.selectEmpl.Click += new System.EventHandler(this.selectEmpl_Click);
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(32, 72);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowHeadersWidth = 51;
+            this.dataGridView2.RowTemplate.Height = 24;
+            this.dataGridView2.Size = new System.Drawing.Size(601, 408);
+            this.dataGridView2.TabIndex = 31;
+            this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label27.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(75)))), ((int)(((byte)(144)))));
+            this.label27.Location = new System.Drawing.Point(26, 14);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(607, 35);
+            this.label27.TabIndex = 30;
+            this.label27.Text = "Просмотр информации из базы данных\r\n";
+            // 
+            // posSalPage
+            // 
+            this.posSalPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(218)))), ((int)(((byte)(226)))));
+            this.posSalPage.Controls.Add(this.label30);
+            this.posSalPage.Controls.Add(this.label31);
+            this.posSalPage.Controls.Add(this.delPos);
+            this.posSalPage.Controls.Add(this.updPos);
+            this.posSalPage.Controls.Add(this.addPos);
+            this.posSalPage.Controls.Add(this.panel6);
+            this.posSalPage.Controls.Add(this.selectPos);
+            this.posSalPage.Controls.Add(this.dataGridView3);
+            this.posSalPage.Controls.Add(this.label41);
+            this.posSalPage.Location = new System.Drawing.Point(4, 25);
+            this.posSalPage.Name = "posSalPage";
+            this.posSalPage.Size = new System.Drawing.Size(1254, 564);
+            this.posSalPage.TabIndex = 3;
+            this.posSalPage.Text = "Должности";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(685, 57);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(529, 16);
+            this.label30.TabIndex = 47;
+            this.label30.Text = "Для добавления, удаления и изменения информации используйте форму ниже.\r\n";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(75)))), ((int)(((byte)(144)))));
+            this.label31.Location = new System.Drawing.Point(682, 11);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(375, 35);
+            this.label31.TabIndex = 46;
+            this.label31.Text = "Изменение информации";
+            // 
+            // delPos
+            // 
+            this.delPos.Location = new System.Drawing.Point(524, 483);
+            this.delPos.Name = "delPos";
+            this.delPos.Size = new System.Drawing.Size(100, 50);
+            this.delPos.TabIndex = 45;
+            this.delPos.Text = "Удалить";
+            this.delPos.UseVisualStyleBackColor = true;
+            this.delPos.Click += new System.EventHandler(this.delPos_Click);
+            // 
+            // updPos
+            // 
+            this.updPos.Location = new System.Drawing.Point(418, 483);
+            this.updPos.Name = "updPos";
+            this.updPos.Size = new System.Drawing.Size(100, 50);
+            this.updPos.TabIndex = 44;
+            this.updPos.Text = "Обновить";
+            this.updPos.UseVisualStyleBackColor = true;
+            this.updPos.Click += new System.EventHandler(this.updPos_Click);
+            // 
+            // addPos
+            // 
+            this.addPos.Location = new System.Drawing.Point(312, 483);
+            this.addPos.Name = "addPos";
+            this.addPos.Size = new System.Drawing.Size(100, 50);
+            this.addPos.TabIndex = 43;
+            this.addPos.Text = "Добавить";
+            this.addPos.UseVisualStyleBackColor = true;
+            this.addPos.Click += new System.EventHandler(this.addPos_Click);
+            // 
+            // panel6
+            // 
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Controls.Add(this.label37);
+            this.panel6.Controls.Add(this.numericUpDown5);
+            this.panel6.Controls.Add(this.posName);
+            this.panel6.Controls.Add(this.label39);
+            this.panel6.Controls.Add(this.posSal);
+            this.panel6.Controls.Add(this.label40);
+            this.panel6.Location = new System.Drawing.Point(688, 106);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(549, 252);
+            this.panel6.TabIndex = 42;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label37.Location = new System.Drawing.Point(15, 30);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(124, 20);
+            this.label37.TabIndex = 15;
+            this.label37.Text = "ID должности";
+            // 
+            // numericUpDown5
+            // 
+            this.numericUpDown5.Location = new System.Drawing.Point(150, 31);
+            this.numericUpDown5.Name = "numericUpDown5";
+            this.numericUpDown5.Size = new System.Drawing.Size(58, 22);
+            this.numericUpDown5.TabIndex = 14;
+            // 
+            // posName
+            // 
+            this.posName.Location = new System.Drawing.Point(258, 148);
+            this.posName.Name = "posName";
+            this.posName.Size = new System.Drawing.Size(286, 22);
+            this.posName.TabIndex = 10;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label39.Location = new System.Drawing.Point(15, 148);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(91, 20);
+            this.label39.TabIndex = 11;
+            this.label39.Text = "Название";
+            // 
+            // posSal
+            // 
+            this.posSal.Location = new System.Drawing.Point(258, 191);
+            this.posSal.Name = "posSal";
+            this.posSal.Size = new System.Drawing.Size(286, 22);
+            this.posSal.TabIndex = 8;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label40.Location = new System.Drawing.Point(15, 191);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(91, 20);
+            this.label40.TabIndex = 9;
+            this.label40.Text = "Зарплата";
+            // 
+            // selectPos
+            // 
+            this.selectPos.Location = new System.Drawing.Point(206, 483);
+            this.selectPos.Name = "selectPos";
+            this.selectPos.Size = new System.Drawing.Size(100, 50);
+            this.selectPos.TabIndex = 41;
+            this.selectPos.Text = "Выбрать данные";
+            this.selectPos.UseVisualStyleBackColor = true;
+            this.selectPos.Click += new System.EventHandler(this.selectPos_Click);
+            // 
+            // dataGridView3
+            // 
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Location = new System.Drawing.Point(23, 69);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.RowHeadersWidth = 51;
+            this.dataGridView3.RowTemplate.Height = 24;
+            this.dataGridView3.Size = new System.Drawing.Size(601, 408);
+            this.dataGridView3.TabIndex = 40;
+            this.dataGridView3.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellClick);
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label41.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(75)))), ((int)(((byte)(144)))));
+            this.label41.Location = new System.Drawing.Point(17, 11);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(607, 35);
+            this.label41.TabIndex = 39;
+            this.label41.Text = "Просмотр информации из базы данных\r\n";
             // 
             // directorPanel
             // 
@@ -545,7 +1046,6 @@
             this.tabControl1.ResumeLayout(false);
             this.viewTab.ResumeLayout(false);
             this.viewTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -558,6 +1058,19 @@
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.emplTab.ResumeLayout(false);
+            this.emplTab.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.posSalPage.ResumeLayout(false);
+            this.posSalPage.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -574,7 +1087,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Label profitLabel;
         private System.Windows.Forms.Label orderLabel;
         private System.Windows.Forms.Label emplLabel;
@@ -606,5 +1118,50 @@
         private System.Windows.Forms.Button delManBtn;
         private System.Windows.Forms.Button updateManBtn;
         private System.Windows.Forms.Button addManBtn;
+        private System.Windows.Forms.TabPage emplTab;
+        private System.Windows.Forms.Button delEmpl;
+        private System.Windows.Forms.Button updEmpl;
+        private System.Windows.Forms.Button addEmpl;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.TextBox emplPas;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox emplLog;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox emplEdu;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox emplPatr;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox emplSName;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox emplName;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Button selectEmpl;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.TabPage posSalPage;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Button delPos;
+        private System.Windows.Forms.Button updPos;
+        private System.Windows.Forms.Button addPos;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.NumericUpDown numericUpDown5;
+        private System.Windows.Forms.TextBox posName;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.TextBox posSal;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Button selectPos;
+        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.Label label41;
     }
 }

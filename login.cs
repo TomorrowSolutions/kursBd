@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Npgsql;
+using MySql.Data.MySqlClient;
 
 namespace kursBd
 {
@@ -18,13 +18,11 @@ namespace kursBd
         {
             InitializeComponent();
         }
-        private string visitorConnString = string.Format("Server={0};Port={1};" +
-                                                        "User Id={2};Password={3};Database={4};",
-                                                        "localhost",5432,"visitor","1","dbKurs");
+        private string visitorConnString = "server=localhost;uid=visitor;pwd=1;database=pgkurs";
         private string directorConnString = String.Empty;
-        private NpgsqlConnection conn;
+        private MySqlConnection conn;
         private string query;
-        private NpgsqlCommand cmd;
+        private MySqlCommand cmd;
         private void openManPage(string conn, int id) => Application.Run(new managerPanel(conn,id));
         private void openEmplPage(string conn,int id) => Application.Run(new employeePanel(conn,id));
         private void openDirPage(string conn) => Application.Run(new directorPanel(conn));
@@ -34,20 +32,19 @@ namespace kursBd
 
             if (emplRadio.Checked)
             {
-                query = String.Format("select  \"id_empl\" from \"{0}\" WHERE login='{1}' and \"password\"='{2}'",
-                                    "Employees", loginTb.Text, passwordTb.Text);
+                query = String.Format("select id_empl from pgkurs.employees where login='{0}' and password='{1}'",
+                                     loginTb.Text, passwordTb.Text);
             }
             else if (managerRadio.Checked)
             {
-                query = String.Format("select \"id_man\" from \"{0}\" WHERE login='{1}' and \"password\"='{2}'",
-                                   "Managers", loginTb.Text, passwordTb.Text);
+                query = String.Format("select id_man from pgkurs.managers where login='{0}' and password='{1}'",
+                                    loginTb.Text, passwordTb.Text);
             }
             else if (dirRadio.Checked)
             {
-                directorConnString= string.Format("Server={0};Port={1};" +
-                                                        "User Id={2};Password={3};Database={4};",
-                                                        "localhost", 5432, loginTb.Text, passwordTb.Text, "dbKurs");
-                query = "select * from \"Managers\"";
+                loginTb.Text = "director";passwordTb.Text = "admin";
+                directorConnString= "server=localhost;uid=director;pwd=admin;database=pgkurs";
+                query = "select * from pgkurs.managers";
             }
             else
             {
@@ -56,13 +53,13 @@ namespace kursBd
             }
             if (emplRadio.Checked | managerRadio.Checked)
             {
-                conn = new NpgsqlConnection(visitorConnString);
+                conn = new MySqlConnection(visitorConnString);
                 try
                 {
                     conn.Open();
-                    cmd = new NpgsqlCommand(query, conn);
-                    int id;
-                    bool isLogin = int.TryParse(cmd.ExecuteScalar().ToString(), out id) ;
+                    cmd = new MySqlCommand(query,conn);
+                    //int id;
+                    bool isLogin = int.TryParse(cmd.ExecuteScalar().ToString(), out int id) ;
                     conn.Close();
                     MessageBox.Show(isLogin ? "Авторизация прошла успешно." : "Не удалось авторизоваться.");
                     if (isLogin==false)
@@ -72,47 +69,42 @@ namespace kursBd
                     if (emplRadio.Checked)
                     {                       
                         this.Close();
-                        thr= new Thread(()=>openEmplPage(string.Format("Server={0};Port={1};" +
-                                                        "User Id={2};Password={3};Database={4};",
-                                                        "localhost", 5432, "employees", "empl", "dbKurs"),id));
+                        thr= new Thread(()=>openEmplPage("server=localhost;uid=employees;pwd=empl;database=pgkurs",id));
                         thr.SetApartmentState(ApartmentState.STA);
                         thr.Start();
                     }
                     else if (managerRadio.Checked)
                     {                        
                         this.Close();
-                        thr = new Thread(() => openManPage(string.Format("Server={0};Port={1};" +
-                                                        "User Id={2};Password={3};Database={4};",
-                                                        "localhost", 5432, "managers", "man", "dbKurs"),id));
+                        thr = new Thread(() => openManPage("server=localhost;uid=managers;pwd=man;database=pgkurs", id));
                         thr.SetApartmentState(ApartmentState.STA);
                         thr.Start();
                     }
                 }
                 catch (Exception ex)
                 {
-                    // MessageBox.Show("Ошибка!" + System.Environment.NewLine + ex.Message);
-                    MessageBox.Show("Ошибка!\nПроверьте правильность введенных данныхю.");
+                    MessageBox.Show("Ошибка!" + System.Environment.NewLine + ex.Message);
                     return;
                 }
             }
             else if (dirRadio.Checked)
             {
-                conn= new NpgsqlConnection(directorConnString);
+                conn= new MySqlConnection(directorConnString);
                 try
                 {
                     conn.Open();
-                    cmd= new NpgsqlCommand(query, conn);
+                    cmd = new MySqlCommand(query,conn) ;
                     cmd.ExecuteNonQuery();
                     conn.Close();
-                    
+                    MessageBox.Show("Авторизация прошла успешно");
                     this.Close();
                     thr = new Thread(()=>openDirPage(directorConnString));
                     thr.SetApartmentState(ApartmentState.STA);
-                    thr.Start();
+                    thr.Start();                    
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ошибка!\nПроверьте правильность введенных данныхю.");
+                    MessageBox.Show("Ошибка!"+Environment.NewLine+ex.Message);
                     return ;
                 }
             }

@@ -1,4 +1,4 @@
-﻿using Npgsql;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,14 +13,14 @@ namespace kursBd
 {
     public partial class managerPanel : Form
     {
-        private NpgsqlConnection conn;
+        private MySqlConnection conn;
         private string query;
-        private NpgsqlCommand cmd;
+        private MySqlCommand cmd;
         readonly private int managerId; 
         public managerPanel(string connect,int id)
         {
             InitializeComponent();
-            conn = new NpgsqlConnection(connect);
+            conn = new MySqlConnection(connect);
             managerId = id;
         }
         
@@ -28,7 +28,8 @@ namespace kursBd
         private void managerPanel_FormClosing(object sender, FormClosingEventArgs e)
         {
 
-            if (MessageBox.Show("Вы действительно хотите выйти?\nНесохраненные изменения будут утеряны", "Выход", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+            if (MessageBox.Show("Вы действительно хотите выйти?\nНесохраненные изменения будут утеряны", "Выход",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
             {
                 e.Cancel = true;
             }
