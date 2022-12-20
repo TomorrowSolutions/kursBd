@@ -32,7 +32,6 @@
             this.loginTb = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.managerRadio = new System.Windows.Forms.RadioButton();
             this.emplRadio = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -74,23 +73,11 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Выберите тип учетной записи";
             // 
-            // managerRadio
-            // 
-            this.managerRadio.AutoSize = true;
-            this.managerRadio.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.managerRadio.Location = new System.Drawing.Point(72, 174);
-            this.managerRadio.Name = "managerRadio";
-            this.managerRadio.Size = new System.Drawing.Size(96, 20);
-            this.managerRadio.TabIndex = 3;
-            this.managerRadio.TabStop = true;
-            this.managerRadio.Text = "Менеджер";
-            this.managerRadio.UseVisualStyleBackColor = true;
-            // 
             // emplRadio
             // 
             this.emplRadio.AutoSize = true;
             this.emplRadio.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.emplRadio.Location = new System.Drawing.Point(175, 174);
+            this.emplRadio.Location = new System.Drawing.Point(135, 174);
             this.emplRadio.Name = "emplRadio";
             this.emplRadio.Size = new System.Drawing.Size(99, 20);
             this.emplRadio.TabIndex = 4;
@@ -171,7 +158,6 @@
             this.panel2.Controls.Add(this.loginTb);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.managerRadio);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.passwordTb);
             this.panel2.Location = new System.Drawing.Point(300, 0);
@@ -183,7 +169,7 @@
             // 
             this.dirRadio.AutoSize = true;
             this.dirRadio.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dirRadio.Location = new System.Drawing.Point(296, 174);
+            this.dirRadio.Location = new System.Drawing.Point(304, 174);
             this.dirRadio.Name = "dirRadio";
             this.dirRadio.Size = new System.Drawing.Size(91, 20);
             this.dirRadio.TabIndex = 9;
@@ -217,7 +203,6 @@
         private System.Windows.Forms.TextBox loginTb;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RadioButton managerRadio;
         private System.Windows.Forms.RadioButton emplRadio;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;

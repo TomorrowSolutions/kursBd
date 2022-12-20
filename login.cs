@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace kursBd
 {
@@ -23,60 +24,81 @@ namespace kursBd
         private MySqlConnection conn;
         private string query;
         private MySqlCommand cmd;
-        private void openManPage(string conn, int id) => Application.Run(new managerPanel(conn,id));
+        MySqlDataReader reader;
+        private void openManPage(string conn, int id, List<string> list) => Application.Run(new managerPanel(conn,id,list));
         private void openEmplPage(string conn,int id) => Application.Run(new employeePanel(conn,id));
         private void openDirPage(string conn) => Application.Run(new directorPanel(conn));
+        private List<string> getManInfo(int manId)
+        {
+            List<string> list = new List<string>();
+            query = $"select concat_ws(' ',name,patronymic) as namepatr from employees where id_empl={manId}";
+            cmd = new MySqlCommand(query, conn);
+            conn.Open();
+            list.Add(cmd.ExecuteScalar().ToString());
+            query = "select salary from position_salary where name='Менеджер'";
+            cmd = new MySqlCommand(query, conn);
+            list.Add(cmd.ExecuteScalar().ToString());
+            conn.Close();
+            return list;
+        }
         private void loginBtn_Click(object sender, EventArgs e)
         {
             Thread thr;
 
-            if (emplRadio.Checked)
+            if (emplRadio.Checked)                
             {
-                query = String.Format("select id_empl from pgkurs.employees where login='{0}' and password='{1}'",
+                
+                query = String.Format("select id_empl as id, positionid as pos from pgkurs.employees where login='{0}' and password='{1}'",
                                      loginTb.Text, passwordTb.Text);
-            }
-            else if (managerRadio.Checked)
-            {
-                query = String.Format("select id_man from pgkurs.managers where login='{0}' and password='{1}'",
-                                    loginTb.Text, passwordTb.Text);
             }
             else if (dirRadio.Checked)
             {
                 loginTb.Text = "director";passwordTb.Text = "admin";
                 directorConnString= "server=localhost;uid=director;pwd=admin;database=pgkurs";
-                query = "select * from pgkurs.managers";
+                query = "select * from pgkurs.employees";
             }
             else
             {
                 MessageBox.Show("Не выбран тип учетной записи!");
                 return;
             }
-            if (emplRadio.Checked | managerRadio.Checked)
+            if (emplRadio.Checked )
             {
                 conn = new MySqlConnection(visitorConnString);
                 try
                 {
+                    int id=0, posId = 0,manPosId=0;
                     conn.Open();
                     cmd = new MySqlCommand(query,conn);
-                    //int id;
-                    bool isLogin = int.TryParse(cmd.ExecuteScalar().ToString(), out int id) ;
+                    reader = cmd.ExecuteReader();
+                    bool isLogin = false;
+                    while (reader.Read())
+                    {
+                       isLogin = int.TryParse(reader["id"].ToString(), out id) &&
+                                   int.TryParse(reader["pos"].ToString(), out posId);
+                    }                    
+                    reader.Close();
+                    query = "select id_pos from position_salary where name='Менеджер'";
+                    cmd = new MySqlCommand(query,conn);
+                    bool isFindManager = int.TryParse(cmd.ExecuteScalar().ToString(), out manPosId);
                     conn.Close();
-                    MessageBox.Show(isLogin ? "Авторизация прошла успешно." : "Не удалось авторизоваться.");
-                    if (isLogin==false)
+                    MessageBox.Show(isLogin&&isFindManager ? "Авторизация прошла успешно." : "Не удалось авторизоваться.");
+                    if (isLogin==false||isFindManager==false)
                     {
                         return;
                     }
-                    if (emplRadio.Checked)
-                    {                       
+                    if (posId==manPosId)
+                    {                
                         this.Close();
-                        thr= new Thread(()=>openEmplPage("server=localhost;uid=employees;pwd=empl;database=pgkurs",id));
+                        thr = new Thread(() => openManPage("server=localhost;uid=managers;pwd=man;database=pgkurs",
+                            id, getManInfo(id)));
                         thr.SetApartmentState(ApartmentState.STA);
                         thr.Start();
                     }
-                    else if (managerRadio.Checked)
-                    {                        
+                    else
+                    {
                         this.Close();
-                        thr = new Thread(() => openManPage("server=localhost;uid=managers;pwd=man;database=pgkurs", id));
+                        thr = new Thread(() => openEmplPage("server=localhost;uid=employees;pwd=empl;database=pgkurs", id));
                         thr.SetApartmentState(ApartmentState.STA);
                         thr.Start();
                     }
