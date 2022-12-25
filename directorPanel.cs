@@ -25,15 +25,18 @@ namespace kursBd
             InitializeComponent();
             conn=new MySqlConnection(connect);
             loadPos();
-        }       
+        }
+        private Dictionary<int, string> idpos;
         private void loadPos()
         {
-            query = "select name from position_salary";
+            idpos = new Dictionary<int, string>();
+            query = "select id_pos as id, name from position_salary";
             cmd = new MySqlCommand(query, conn);
             conn.Open();
             dr=cmd.ExecuteReader();
             while (dr.Read()) {
                 emplPosDD.Items.Add(dr["name"]);
+                idpos.Add((int)dr["id"], dr["name"].ToString());
             }
             dr.Close();
             conn.Close();
@@ -49,6 +52,19 @@ namespace kursBd
             conn.Close();
             return id;
 
+        }
+        
+        private string getPosName(int id)
+        {
+            
+            string name= idpos.Where(kv => kv.Key.Equals(id))
+                              .Select(kv => kv.Value).First().ToString();
+            /*query = $"select name from position_salary where id_pos={id}";
+            cmd = new MySqlCommand(query, conn);
+            conn.Open();
+            name = cmd.ExecuteScalar().ToString();
+            conn.Close();*/
+            return name;
         }
         
         private void directorPanel_FormClosing(object sender, FormClosingEventArgs e)
@@ -67,7 +83,8 @@ namespace kursBd
 
         private void selectEmpl_Click(object sender, EventArgs e)
         {
-            query = "select * from pgkurs.employees";
+            query = "select id_empl, surname as фамилия, name as имя, patronymic as отчеcтво, education as образование," +
+                " positionid as номер_должности,dateofstart as дата_начала_работы,login, password from employees";
             cmd = new MySqlCommand(query, conn);
             dt = new DataTable();
             try
@@ -75,6 +92,9 @@ namespace kursBd
                 conn.Open();
                 dt.Load(cmd.ExecuteReader());
                 dataGridView2.DataSource = dt;
+                dataGridView2.Columns["id_empl"].Visible = false;
+                dataGridView2.Columns["login"].Visible = false;
+                dataGridView2.Columns["password"].Visible = false;
                 conn.Close();
             }
             catch (Exception ex)
@@ -91,15 +111,17 @@ namespace kursBd
             if (e.RowIndex >= 0)
             {
                 numericUpDown2.Value = decimal.Parse(dataGridView2.Rows[e.RowIndex].Cells["id_empl"].Value.ToString());
-                numericUpDown1.Value = decimal.Parse(dataGridView2.Rows[e.RowIndex].Cells["positionid"].Value.ToString());
-                emplSName.Text = dataGridView2.Rows[e.RowIndex].Cells["surname"].Value.ToString();
-                emplName.Text = dataGridView2.Rows[e.RowIndex].Cells["name"].Value.ToString();
-                emplPatr.Text = dataGridView2.Rows[e.RowIndex].Cells["patronymic"].Value.ToString();
-                emplEdu.Text = dataGridView2.Rows[e.RowIndex].Cells["education"].Value.ToString();
-                dateTimePicker2.Value = DateTime.Parse(dataGridView2.Rows[e.RowIndex].Cells["dateofstart"].Value.ToString());
+                numericUpDown1.Value = decimal.Parse(dataGridView2.Rows[e.RowIndex].Cells["номер_должности"].Value.ToString());
+                emplSName.Text = dataGridView2.Rows[e.RowIndex].Cells["фамилия"].Value.ToString();
+                emplName.Text = dataGridView2.Rows[e.RowIndex].Cells["имя"].Value.ToString();
+                emplPatr.Text = dataGridView2.Rows[e.RowIndex].Cells["отчеcтво"].Value.ToString();
+                emplEdu.Text = dataGridView2.Rows[e.RowIndex].Cells["образование"].Value.ToString();
+                dateTimePicker2.Value = DateTime.Parse(dataGridView2.Rows[e.RowIndex].Cells["дата_начала_работы"].Value.ToString());
                 emplLog.Text = dataGridView2.Rows[e.RowIndex].Cells["login"].Value.ToString();
                 emplPas.UseSystemPasswordChar = false;
                 emplPas.Text = dataGridView2.Rows[e.RowIndex].Cells["password"].Value.ToString();
+                emplPosDD.SelectedIndex = emplPosDD.FindString(getPosName((int)numericUpDown1.Value));
+
 
             }
         }
@@ -185,7 +207,7 @@ namespace kursBd
                 try
                     {
 
-                        query = "call emplUpdate(@emplId,@surn,@name,@patr,@edu,@posId,@date,@log,@pas)";
+                        query = "call emplUpd(@emplId,@surn,@name,@patr,@edu,@posId,@date,@log,@pas)";
                         cmd = new MySqlCommand(query, conn);
                         cmd.Parameters.AddWithValue("@emplId",int.Parse(numericUpDown2.Value.ToString()));
                         cmd.Parameters.AddWithValue("@name", emplName.Text);
@@ -220,7 +242,7 @@ namespace kursBd
 
         private void selectPos_Click(object sender, EventArgs e)
         {
-            query = "select * from pgkurs.position_salary";
+            query = "select id_pos, name as название, salary as оклад from position_salary";
             cmd = new MySqlCommand(query, conn);
             dt = new DataTable();
             try
@@ -229,6 +251,7 @@ namespace kursBd
                 dt.Load(cmd.ExecuteReader());
                 dataGridView3.DataSource = dt;
                 conn.Close();
+                dataGridView3.Columns["id_pos"].Visible = false;
             }
             catch (Exception ex)
             {
@@ -243,8 +266,8 @@ namespace kursBd
             if (e.RowIndex >= 0)
             {
                 numericUpDown5.Value = decimal.Parse(dataGridView3.Rows[e.RowIndex].Cells["id_pos"].Value.ToString());
-                posName.Text = dataGridView3.Rows[e.RowIndex].Cells["name"].Value.ToString();
-                posSal.Text = dataGridView3.Rows[e.RowIndex].Cells["salary"].Value.ToString();                
+                posName.Text = dataGridView3.Rows[e.RowIndex].Cells["название"].Value.ToString();
+                posSal.Text = dataGridView3.Rows[e.RowIndex].Cells["оклад"].Value.ToString();                
 
             }
         }
@@ -363,22 +386,23 @@ namespace kursBd
         }
 
         private void emplServSelect_Click(object sender, EventArgs e)
-        {
+        {            
             query = "select * from pgkurs.employee_service";
             cmd = new MySqlCommand(query, conn);
             dt = new DataTable();
-            emplLB.Items.Clear();servLB.Items.Clear();
+            emplDD.Items.Clear();servDD.Items.Clear();
             try
             {
                 conn.Open();
                 dt.Load(cmd.ExecuteReader());
                 dataGridView4.DataSource = dt;
-                query = "select id_empl as id, concat_ws(' ',surname,name,patronymic) as FIO from pgkurs.employees";
+                query = "select id_empl as id, concat_ws(' ',surname,name,patronymic) as FIO from pgkurs.employees " +
+                    "where positionid != (select id_pos from position_salary where name='Менеджер')";
                 cmd = new MySqlCommand(query, conn);
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    emplLB.Items.Add($"{reader["id"]}--{reader["FIO"]}");
+                    emplDD.Items.Add($"{reader["id"]}--{reader["FIO"]}");
                 }
                 reader.Close();
                 query = "select id_serv as id, name from pgkurs.services";
@@ -386,7 +410,7 @@ namespace kursBd
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    servLB.Items.Add($"{reader["id"]}--{reader["name"]}");
+                    servDD.Items.Add($"{reader["id"]}--{reader["name"]}");
                 }
                 conn.Close();
             }
@@ -397,18 +421,7 @@ namespace kursBd
                 return;
             }
         }
-
-        private void emplLB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            numericUpDown4.Value = int.Parse(emplLB.SelectedItem.ToString()
-                .Substring(0, emplLB.SelectedItem.ToString().IndexOf('-')));
-        }
-
-        private void servLB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            numericUpDown6.Value = int.Parse(servLB.SelectedItem.ToString()
-              .Substring(0, servLB.SelectedItem.ToString().IndexOf('-')));
-        }
+        //Связать dd c dgv
 
         private void emplServAdd_Click(object sender, EventArgs e)
         {
@@ -437,8 +450,8 @@ namespace kursBd
             {
                 numericUpDown4.Value = int.Parse(dataGridView4.Rows[e.RowIndex].Cells["employeeid"].Value.ToString());
                 numericUpDown6.Value = int.Parse(dataGridView4.Rows[e.RowIndex].Cells["serviceid"].Value.ToString());
-                emplLB.SelectedIndex = emplLB.FindString(numericUpDown4.Value.ToString());
-                servLB.SelectedIndex = servLB.FindString(numericUpDown6.Value.ToString());
+                emplDD.SelectedIndex = emplDD.FindString(numericUpDown4.Value.ToString());
+                servDD.SelectedIndex = servDD.FindString(numericUpDown6.Value.ToString());
             }
         }
 
@@ -487,6 +500,171 @@ namespace kursBd
                 conn.Close();
                 return;
             }
+        }
+
+        private void selectServ_Click(object sender, EventArgs e)
+        {
+            query = "select id_serv,name as название,price as стоимость,periodofexecution as время_выполнения from services";
+            cmd = new MySqlCommand(query, conn);
+            dt = new DataTable();
+            try
+            {
+                conn.Open();
+                dt.Load(cmd.ExecuteReader());
+                dataGridView1.DataSource = dt;
+                conn.Close();
+                dataGridView1.Columns["id_serv"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка!" + Environment.NewLine + ex.Message);
+                conn.Close();
+                return;
+            }
+        }
+
+        private void addService_Click(object sender, EventArgs e)
+        {
+            if (!(string.IsNullOrEmpty(servName.Text) &&
+               string.IsNullOrEmpty(servPrice.Text) &&
+               string.IsNullOrEmpty(servPeriod.Text)))
+            {
+                if (double.TryParse(servPrice.Text, out double price) &&
+                    int.TryParse(servPeriod.Text, out int period))
+                {
+                    try
+                    {
+                        query = "insert into pgkurs.services(name,price,periodofexecution) " +
+                            "values(@name,@price,@period)";
+                        cmd = new MySqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@name", servName.Text);
+                        cmd.Parameters.AddWithValue("@price", price);
+                        cmd.Parameters.AddWithValue("@period", period);
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                        MessageBox.Show("Данные успшено вставлены");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Ошибка!" + Environment.NewLine + ex.Message);
+                        conn.Close();
+                        return;
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка!\nНе корректное значение цены и/или периода выполнения.");
+                    return;
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Ошибка!\nНе все обязательные поля заполнены.");
+                return;
+            }
+        }
+
+        private void updServ_Click(object sender, EventArgs e)
+        {
+            if (!(string.IsNullOrEmpty(servName.Text) &&
+               string.IsNullOrEmpty(servPrice.Text) &&
+               string.IsNullOrEmpty(servPeriod.Text)))
+            {
+                if (double.TryParse(servPrice.Text, out double price) &&
+                    int.TryParse(servPeriod.Text, out int period))
+                {
+                    try
+                    {
+                        query = "update pgkurs.services set name=@name,price=@price,periodofexecution=@period where id_serv=@servId";
+                        cmd = new MySqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@servId", (int)numericUpDown3.Value);
+                        cmd.Parameters.AddWithValue("@name", servName.Text);
+                        cmd.Parameters.AddWithValue("@price", price);
+                        cmd.Parameters.AddWithValue("@period", period);
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                        MessageBox.Show("Данные успшено вставлены");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Ошибка!" + Environment.NewLine + ex.Message);
+                        conn.Close();
+                        return;
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка!\nНе корректное значение цены и/или периода выполнения.");
+                    return;
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Ошибка!\nНе все обязательные поля заполнены.");
+                return;
+            }
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                numericUpDown3.Value = decimal.Parse(dataGridView1.Rows[e.RowIndex].Cells["id_serv"].Value.ToString());
+                servName.Text = dataGridView1.Rows[e.RowIndex].Cells["название"].Value.ToString();
+                servPrice.Text = dataGridView1.Rows[e.RowIndex].Cells["стоимость"].Value.ToString();
+                servPeriod.Text = dataGridView1.Rows[e.RowIndex].Cells["время_выполнения"].Value.ToString();
+            }
+        }
+
+        private void delServ_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("При удалении услуг," +
+                "будут так же удалены связанные с ней записи в таблице соотношений работников и услуг,\n" +
+                "а также договоры если в них будет присутствовать данная услуга.", "Удаление",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            {
+                try
+                {
+                    query = "call servDel(@servId)";
+                    cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@servId", int.Parse(numericUpDown3.Value.ToString()));
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    MessageBox.Show("Успешно удалено");
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка!" + Environment.NewLine + ex.Message);
+                    conn.Close();
+                    return;
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private void emplDD_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            numericUpDown4.Value = int.Parse(emplDD.SelectedItem.ToString()
+               .Substring(0, emplDD.SelectedItem.ToString().IndexOf('-')));
+        }
+
+        private void servDD_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            numericUpDown6.Value = int.Parse(servDD.SelectedItem.ToString()
+              .Substring(0, servDD.SelectedItem.ToString().IndexOf('-')));
         }
     }
 }

@@ -47,7 +47,7 @@ namespace kursBd
 
             if (emplRadio.Checked)                
             {
-                
+                loginTb.Text = "Petr"; passwordTb.Text = "abc123";
                 query = String.Format("select id_empl as id, positionid as pos from pgkurs.employees where login='{0}' and password='{1}'",
                                      loginTb.Text, passwordTb.Text);
             }
