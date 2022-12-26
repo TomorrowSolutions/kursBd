@@ -59,11 +59,6 @@ namespace kursBd
             
             string name= idpos.Where(kv => kv.Key.Equals(id))
                               .Select(kv => kv.Value).First().ToString();
-            /*query = $"select name from position_salary where id_pos={id}";
-            cmd = new MySqlCommand(query, conn);
-            conn.Open();
-            name = cmd.ExecuteScalar().ToString();
-            conn.Close();*/
             return name;
         }
         
@@ -128,9 +123,9 @@ namespace kursBd
 
         private void addEmpl_Click(object sender, EventArgs e)
         {
-            if (!(string.IsNullOrEmpty(emplName.Text)&&
-                string.IsNullOrEmpty(emplEdu.Text) &&
-                string.IsNullOrEmpty(emplLog.Text) &&
+            if (!(string.IsNullOrEmpty(emplName.Text)||
+                string.IsNullOrEmpty(emplEdu.Text) ||
+                string.IsNullOrEmpty(emplLog.Text) ||
                 string.IsNullOrEmpty(emplPas.Text)))
             {
                 numericUpDown1.Value =getPosId(emplPosDD.SelectedItem.ToString());
@@ -198,9 +193,9 @@ namespace kursBd
 
         private void updEmpl_Click(object sender, EventArgs e)
         {
-            if (!(string.IsNullOrEmpty(emplName.Text) &&
-                string.IsNullOrEmpty(emplEdu.Text) &&
-                string.IsNullOrEmpty(emplLog.Text) &&
+            if (!(string.IsNullOrEmpty(emplName.Text) ||
+                string.IsNullOrEmpty(emplEdu.Text) ||
+                string.IsNullOrEmpty(emplLog.Text) ||
                 string.IsNullOrEmpty(emplPas.Text)))
             {
                 numericUpDown1.Value = getPosId(emplPosDD.SelectedItem.ToString());
@@ -274,7 +269,7 @@ namespace kursBd
 
         private void addPos_Click(object sender, EventArgs e)
         {
-            if (!(string.IsNullOrEmpty(posName.Text) &&
+            if (!(string.IsNullOrEmpty(posName.Text) ||
                 string.IsNullOrEmpty(posSal.Text)))
             {
                 if (double.TryParse(posSal.Text, out double sal))
@@ -387,7 +382,7 @@ namespace kursBd
 
         private void emplServSelect_Click(object sender, EventArgs e)
         {            
-            query = "select * from pgkurs.employee_service";
+            query = "select employeeid as номер_сотрудника,serviceid as номер_услуги from pgkurs.employee_service";
             cmd = new MySqlCommand(query, conn);
             dt = new DataTable();
             emplDD.Items.Clear();servDD.Items.Clear();
@@ -448,8 +443,8 @@ namespace kursBd
         {
             if (e.RowIndex >= 0)
             {
-                numericUpDown4.Value = int.Parse(dataGridView4.Rows[e.RowIndex].Cells["employeeid"].Value.ToString());
-                numericUpDown6.Value = int.Parse(dataGridView4.Rows[e.RowIndex].Cells["serviceid"].Value.ToString());
+                numericUpDown4.Value = int.Parse(dataGridView4.Rows[e.RowIndex].Cells["номер_сотрудника"].Value.ToString());
+                numericUpDown6.Value = int.Parse(dataGridView4.Rows[e.RowIndex].Cells["номер_услуги"].Value.ToString());
                 emplDD.SelectedIndex = emplDD.FindString(numericUpDown4.Value.ToString());
                 servDD.SelectedIndex = servDD.FindString(numericUpDown6.Value.ToString());
             }
@@ -525,8 +520,8 @@ namespace kursBd
 
         private void addService_Click(object sender, EventArgs e)
         {
-            if (!(string.IsNullOrEmpty(servName.Text) &&
-               string.IsNullOrEmpty(servPrice.Text) &&
+            if (!(string.IsNullOrEmpty(servName.Text) ||
+               string.IsNullOrEmpty(servPrice.Text) ||
                string.IsNullOrEmpty(servPeriod.Text)))
             {
                 if (double.TryParse(servPrice.Text, out double price) &&
@@ -570,8 +565,8 @@ namespace kursBd
 
         private void updServ_Click(object sender, EventArgs e)
         {
-            if (!(string.IsNullOrEmpty(servName.Text) &&
-               string.IsNullOrEmpty(servPrice.Text) &&
+            if (!(string.IsNullOrEmpty(servName.Text) ||
+               string.IsNullOrEmpty(servPrice.Text) ||
                string.IsNullOrEmpty(servPeriod.Text)))
             {
                 if (double.TryParse(servPrice.Text, out double price) &&

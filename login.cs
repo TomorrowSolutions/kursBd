@@ -26,7 +26,7 @@ namespace kursBd
         private MySqlCommand cmd;
         MySqlDataReader reader;
         private void openManPage(string conn, int id, List<string> list) => Application.Run(new managerPanel(conn,id,list));
-        private void openEmplPage(string conn,int id) => Application.Run(new employeePanel(conn,id));
+        private void openEmplPage(string conn,int id, List<string> list) => Application.Run(new employeePanel(conn,id,list));
         private void openDirPage(string conn) => Application.Run(new directorPanel(conn));
         private List<string> getManInfo(int manId)
         {
@@ -41,13 +41,28 @@ namespace kursBd
             conn.Close();
             return list;
         }
+        private List<string> getEmplInfo(int emplId)
+        {
+            List<string> list = new List<string>();
+            query = $"select concat_ws(' ',name,patronymic) as namepatr from employees where id_empl={emplId}";
+            cmd = new MySqlCommand(query, conn);
+            conn.Open();
+            list.Add(cmd.ExecuteScalar().ToString());
+            query = $"select salary from position_salary where id_pos=(select positionid from employees where id_empl={emplId})";
+            cmd = new MySqlCommand(query, conn);
+            list.Add(cmd.ExecuteScalar().ToString());
+            conn.Close();
+            return list;
+        }
+
         private void loginBtn_Click(object sender, EventArgs e)
         {
             Thread thr;
 
             if (emplRadio.Checked)                
             {
-                loginTb.Text = "Petr"; passwordTb.Text = "abc123";
+                loginTb.Text = "LosevAA"; passwordTb.Text = "xz85";
+                //loginTb.Text = "Petr"; passwordTb.Text = "abc123";
                 query = String.Format("select id_empl as id, positionid as pos from pgkurs.employees where login='{0}' and password='{1}'",
                                      loginTb.Text, passwordTb.Text);
             }
@@ -98,7 +113,8 @@ namespace kursBd
                     else
                     {
                         this.Close();
-                        thr = new Thread(() => openEmplPage("server=localhost;uid=employees;pwd=empl;database=pgkurs", id));
+                        thr = new Thread(() => openEmplPage("server=localhost;uid=employees;pwd=empl;database=pgkurs", id,
+                            getEmplInfo(id)));
                         thr.SetApartmentState(ApartmentState.STA);
                         thr.Start();
                     }

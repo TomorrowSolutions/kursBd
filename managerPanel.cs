@@ -93,20 +93,18 @@ namespace kursBd
             if (!(string.IsNullOrEmpty(objName.Text) ||
                 string.IsNullOrEmpty(objCity.Text) ||
                 string.IsNullOrEmpty(objStreet.Text) ||
-                string.IsNullOrEmpty(objBuild.Text) ||
-                string.IsNullOrEmpty(objType.Text)))
+                string.IsNullOrEmpty(objBuild.Text)))
             {
                 try
                 {
-                    query = "insert into pgkurs.objects(name,image,city,street,building,type) " +
-                        "values(@name,@img,@city,@street,@build,@type)";
+                    query = "insert into pgkurs.objects(name,image,city,street,building) " +
+                        "values(@name,@img,@city,@street,@build)";
                     cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@name", objName.Text);
                     cmd.Parameters.AddWithValue("@img", preview.Image == null ? null : imgToByte(preview.Image));
                     cmd.Parameters.AddWithValue("@city", objCity.Text);
                     cmd.Parameters.AddWithValue("@street", objStreet.Text);
                     cmd.Parameters.AddWithValue("@build", objBuild.Text);
-                    cmd.Parameters.AddWithValue("@type", objType.Text);
                     conn.Open();
                     cmd.ExecuteNonQuery();
                     conn.Close();
@@ -130,7 +128,7 @@ namespace kursBd
         private void selectObj_Click(object sender, EventArgs e)
         {
             query = "select id_obj, name as название, image, city as город, street as улица, building as здание," +
-                "type as тип from objects";
+                "from objects";
             cmd = new MySqlCommand(query, conn);
             dt = new DataTable();
             try
@@ -170,7 +168,6 @@ namespace kursBd
                     objCity.Text = dataGridView2.Rows[e.RowIndex].Cells["город"].Value.ToString();
                     objStreet.Text = dataGridView2.Rows[e.RowIndex].Cells["улица"].Value.ToString();
                     objBuild.Text = dataGridView2.Rows[e.RowIndex].Cells["здание"].Value.ToString();
-                    objType.Text = dataGridView2.Rows[e.RowIndex].Cells["тип"].Value.ToString();
                 }
             }
         }
@@ -180,12 +177,11 @@ namespace kursBd
             if (!(string.IsNullOrEmpty(objName.Text) ||
                 string.IsNullOrEmpty(objCity.Text) ||
                 string.IsNullOrEmpty(objStreet.Text) ||
-                string.IsNullOrEmpty(objBuild.Text) ||
-                string.IsNullOrEmpty(objType.Text)))
+                string.IsNullOrEmpty(objBuild.Text)))
             {
                 try
                 {
-                    query = "update pgkurs.objects set name=@name,image=@img,city=@city,street=@street,building=@build,type=@type " +
+                    query = "update pgkurs.objects set name=@name,image=@img,city=@city,street=@street,building=@build " +
                         "where id_obj=@objId";
                     cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@objId", (int)numericUpDown2.Value);
@@ -194,7 +190,6 @@ namespace kursBd
                     cmd.Parameters.AddWithValue("@city", objCity.Text);
                     cmd.Parameters.AddWithValue("@street", objStreet.Text);
                     cmd.Parameters.AddWithValue("@build", objBuild.Text);
-                    cmd.Parameters.AddWithValue("@type", objType.Text);
                     conn.Open();
                     cmd.ExecuteNonQuery();
                     conn.Close();
@@ -549,8 +544,10 @@ namespace kursBd
             {
                 numericUpDown4.Value = decimal.Parse(dataGridView4.Rows[e.RowIndex].Cells["номер_договора"].Value.ToString());
                 numericUpDown5.Value = decimal.Parse(dataGridView4.Rows[e.RowIndex].Cells["количество_услуг"].Value.ToString());
+
                 objDD.SelectedIndex = objDD.FindString(
                     obj[int.Parse(dataGridView4.Rows[e.RowIndex].Cells["номер_объекта"].Value.ToString())]);
+                //Номер объекта=ключ по нему получаем значение и ищем это значение в дд, которое возвращает индекс
                 servDD.SelectedIndex = servDD.FindString(
                    serv[int.Parse(dataGridView4.Rows[e.RowIndex].Cells["номер_услуги"].Value.ToString())]);
             }

@@ -79,8 +79,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.objType = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
             this.objBuild = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.objStreet = new System.Windows.Forms.TextBox();
@@ -607,7 +605,7 @@
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(75)))), ((int)(((byte)(144)))));
-            this.label22.Location = new System.Drawing.Point(652, 411);
+            this.label22.Location = new System.Drawing.Point(675, 366);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(312, 26);
             this.label22.TabIndex = 49;
@@ -615,9 +613,9 @@
             // 
             // preview
             // 
-            this.preview.Location = new System.Drawing.Point(689, 456);
+            this.preview.Location = new System.Drawing.Point(680, 406);
             this.preview.Name = "preview";
-            this.preview.Size = new System.Drawing.Size(200, 100);
+            this.preview.Size = new System.Drawing.Size(200, 150);
             this.preview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.preview.TabIndex = 48;
             this.preview.TabStop = false;
@@ -675,8 +673,6 @@
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.objType);
-            this.panel3.Controls.Add(this.label18);
             this.panel3.Controls.Add(this.objBuild);
             this.panel3.Controls.Add(this.label19);
             this.panel3.Controls.Add(this.objStreet);
@@ -689,25 +685,8 @@
             this.panel3.Controls.Add(this.label26);
             this.panel3.Location = new System.Drawing.Point(680, 103);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(549, 294);
+            this.panel3.Size = new System.Drawing.Size(549, 229);
             this.panel3.TabIndex = 42;
-            // 
-            // objType
-            // 
-            this.objType.Location = new System.Drawing.Point(258, 234);
-            this.objType.Name = "objType";
-            this.objType.Size = new System.Drawing.Size(286, 22);
-            this.objType.TabIndex = 29;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label18.Location = new System.Drawing.Point(15, 233);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(39, 20);
-            this.label18.TabIndex = 28;
-            this.label18.Text = "Тип";
             // 
             // objBuild
             // 
@@ -1314,8 +1293,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox objType;
-        private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox objBuild;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox objStreet;

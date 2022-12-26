@@ -39,6 +39,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(directorPanel));
             this.emplServTab = new System.Windows.Forms.TabPage();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.servDD = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.emplDD = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.label32 = new System.Windows.Forms.Label();
@@ -122,12 +127,8 @@
             this.selectServ = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label10 = new System.Windows.Forms.Label();
-            this.emplDD = new System.Windows.Forms.ComboBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.servDD = new System.Windows.Forms.ComboBox();
             this.emplServTab.SuspendLayout();
+            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
@@ -149,7 +150,6 @@
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // emplServTab
@@ -170,6 +170,56 @@
             this.emplServTab.Size = new System.Drawing.Size(1254, 564);
             this.emplServTab.TabIndex = 4;
             this.emplServTab.Text = "Сотрудники и услуги";
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.servDD);
+            this.panel4.Controls.Add(this.label11);
+            this.panel4.Controls.Add(this.emplDD);
+            this.panel4.Controls.Add(this.label12);
+            this.panel4.Location = new System.Drawing.Point(688, 150);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(549, 252);
+            this.panel4.TabIndex = 62;
+            // 
+            // servDD
+            // 
+            this.servDD.FormattingEnabled = true;
+            this.servDD.Location = new System.Drawing.Point(258, 134);
+            this.servDD.Name = "servDD";
+            this.servDD.Size = new System.Drawing.Size(286, 24);
+            this.servDD.TabIndex = 62;
+            this.servDD.SelectedIndexChanged += new System.EventHandler(this.servDD_SelectedIndexChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label11.Location = new System.Drawing.Point(14, 91);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(100, 20);
+            this.label11.TabIndex = 11;
+            this.label11.Text = "Сотрудник";
+            // 
+            // emplDD
+            // 
+            this.emplDD.FormattingEnabled = true;
+            this.emplDD.Location = new System.Drawing.Point(258, 87);
+            this.emplDD.Name = "emplDD";
+            this.emplDD.Size = new System.Drawing.Size(286, 24);
+            this.emplDD.TabIndex = 61;
+            this.emplDD.SelectedIndexChanged += new System.EventHandler(this.emplDD_SelectedIndexChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label12.Location = new System.Drawing.Point(14, 134);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(65, 20);
+            this.label12.TabIndex = 9;
+            this.label12.Text = "Услуга";
             // 
             // numericUpDown6
             // 
@@ -1111,56 +1161,6 @@
             this.label10.TabIndex = 66;
             this.label10.Text = "Просмотр информации из базы данных\r\n";
             // 
-            // emplDD
-            // 
-            this.emplDD.FormattingEnabled = true;
-            this.emplDD.Location = new System.Drawing.Point(258, 87);
-            this.emplDD.Name = "emplDD";
-            this.emplDD.Size = new System.Drawing.Size(286, 24);
-            this.emplDD.TabIndex = 61;
-            this.emplDD.SelectedIndexChanged += new System.EventHandler(this.emplDD_SelectedIndexChanged);
-            // 
-            // panel4
-            // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.servDD);
-            this.panel4.Controls.Add(this.label11);
-            this.panel4.Controls.Add(this.emplDD);
-            this.panel4.Controls.Add(this.label12);
-            this.panel4.Location = new System.Drawing.Point(688, 150);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(549, 252);
-            this.panel4.TabIndex = 62;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label11.Location = new System.Drawing.Point(14, 91);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(110, 20);
-            this.label11.TabIndex = 11;
-            this.label11.Text = "Сотрудники";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label12.Location = new System.Drawing.Point(14, 134);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(65, 20);
-            this.label12.TabIndex = 9;
-            this.label12.Text = "Услуги";
-            // 
-            // servDD
-            // 
-            this.servDD.FormattingEnabled = true;
-            this.servDD.Location = new System.Drawing.Point(258, 134);
-            this.servDD.Name = "servDD";
-            this.servDD.Size = new System.Drawing.Size(286, 24);
-            this.servDD.TabIndex = 62;
-            this.servDD.SelectedIndexChanged += new System.EventHandler(this.servDD_SelectedIndexChanged);
-            // 
             // directorPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1176,6 +1176,8 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.directorPanel_FormClosing);
             this.emplServTab.ResumeLayout(false);
             this.emplServTab.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
@@ -1207,8 +1209,6 @@
             this.panel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
