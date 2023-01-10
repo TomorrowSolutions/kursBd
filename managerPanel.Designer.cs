@@ -96,12 +96,12 @@
             this.label29 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.clientDD = new System.Windows.Forms.ComboBox();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.label25 = new System.Windows.Forms.Label();
             this.manDD = new System.Windows.Forms.ComboBox();
             this.label27 = new System.Windows.Forms.Label();
             this.orderHelp = new System.Windows.Forms.Button();
             this.delOrd = new System.Windows.Forms.Button();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.updOrder = new System.Windows.Forms.Button();
             this.addOrder = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
@@ -585,7 +585,7 @@
             this.delImg.Name = "delImg";
             this.delImg.Size = new System.Drawing.Size(130, 50);
             this.delImg.TabIndex = 51;
-            this.delImg.Text = "Загрузить изображение";
+            this.delImg.Text = "Удалить изображение";
             this.delImg.UseVisualStyleBackColor = true;
             this.delImg.Click += new System.EventHandler(this.delImg_Click);
             // 
@@ -853,6 +853,14 @@
             this.clientDD.Size = new System.Drawing.Size(286, 24);
             this.clientDD.TabIndex = 62;
             // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.Location = new System.Drawing.Point(3, 3);
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(58, 22);
+            this.numericUpDown3.TabIndex = 14;
+            this.numericUpDown3.Visible = false;
+            // 
             // label25
             // 
             this.label25.AutoSize = true;
@@ -905,14 +913,6 @@
             this.delOrd.Text = "Удалить";
             this.delOrd.UseVisualStyleBackColor = true;
             this.delOrd.Click += new System.EventHandler(this.delOrd_Click);
-            // 
-            // numericUpDown3
-            // 
-            this.numericUpDown3.Location = new System.Drawing.Point(3, 3);
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(58, 22);
-            this.numericUpDown3.TabIndex = 14;
-            this.numericUpDown3.Visible = false;
             // 
             // updOrder
             // 
