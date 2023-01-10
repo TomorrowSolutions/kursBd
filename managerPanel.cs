@@ -57,17 +57,27 @@ namespace kursBd
         {
             if (e.RowIndex >= 0)
             {
-                numericUpDown1.Value = decimal.Parse(dataGridView1.Rows[e.RowIndex].Cells["id_client"].Value.ToString());
-                clientSurn.Text = dataGridView1.Rows[e.RowIndex].Cells["фамилия_представителя"].Value.ToString();
-                clientName.Text = dataGridView1.Rows[e.RowIndex].Cells["имя_представителя"].Value.ToString();
-                clientPatr.Text = dataGridView1.Rows[e.RowIndex].Cells["отчество_представителя"].Value.ToString();
-                clientPhone.Text = dataGridView1.Rows[e.RowIndex].Cells["номер_телефона"].Value.ToString();
-                personType.SelectedIndex = dataGridView1.Rows[e.RowIndex].Cells["тип_лица"].Value.ToString() == "юридическое" ?
+                try
+                {
+                    numericUpDown1.Value = decimal.Parse(dataGridView1.Rows[e.RowIndex].Cells["id_client"].Value.ToString());
+                    personType.SelectedIndex = dataGridView1.Rows[e.RowIndex].Cells["тип_лица"].Value.ToString() == "юридическое" ?
                     1 : 0;
-                clientCity.Text = dataGridView1.Rows[e.RowIndex].Cells["город"].Value.ToString();
-                clientStreet.Text = dataGridView1.Rows[e.RowIndex].Cells["улица"].Value.ToString();
-                clientBuild.Text = dataGridView1.Rows[e.RowIndex].Cells["здание"].Value.ToString();
-                clientAcc.Text = dataGridView1.Rows[e.RowIndex].Cells["номер_счета"].Value.ToString();
+                }
+                catch (Exception)
+                {
+
+                }
+                finally
+                {
+                    clientSurn.Text = dataGridView1.Rows[e.RowIndex].Cells["фамилия_представителя"].Value.ToString();
+                    clientName.Text = dataGridView1.Rows[e.RowIndex].Cells["имя_представителя"].Value.ToString();
+                    clientPatr.Text = dataGridView1.Rows[e.RowIndex].Cells["отчество_представителя"].Value.ToString();
+                    clientPhone.Text = dataGridView1.Rows[e.RowIndex].Cells["номер_телефона"].Value.ToString();
+                    clientCity.Text = dataGridView1.Rows[e.RowIndex].Cells["город"].Value.ToString();
+                    clientStreet.Text = dataGridView1.Rows[e.RowIndex].Cells["улица"].Value.ToString();
+                    clientBuild.Text = dataGridView1.Rows[e.RowIndex].Cells["здание"].Value.ToString();
+                    clientAcc.Text = dataGridView1.Rows[e.RowIndex].Cells["номер_счета"].Value.ToString();
+                }             
             }
         }
 
@@ -127,7 +137,7 @@ namespace kursBd
 
         private void selectObj_Click(object sender, EventArgs e)
         {
-            query = "select id_obj, name as название, image, city as город, street as улица, building as здание," +
+            query = "select id_obj, name as название, image, city as город, street as улица, building as здание " +
                 "from objects";
             cmd = new MySqlCommand(query, conn);
             dt = new DataTable();
@@ -290,7 +300,7 @@ namespace kursBd
                     cmd.Parameters.AddWithValue("@city", clientCity.Text);
                     cmd.Parameters.AddWithValue("@street", clientStreet.Text);
                     cmd.Parameters.AddWithValue("@build", clientBuild.Text);
-                    cmd.Parameters.AddWithValue("@acc", clientAcc.Text.All(char.IsDigit) ? clientPhone.Text : string.Empty);
+                    cmd.Parameters.AddWithValue("@acc", clientAcc.Text.All(char.IsDigit) ? clientAcc.Text : string.Empty);
                     conn.Open();
                     cmd.ExecuteNonQuery();
                     conn.Close();
@@ -402,6 +412,7 @@ namespace kursBd
 
         private void selectOrder_Click(object sender, EventArgs e)
         {
+            //Выборка данных из таблицы договоров с локализацией
             query = "select id_order as номер_договора, managerid, clientid, dateofsigning as дата_подписания," +
                 "dateofcomplete as дата_выполнения, price as стоимость from orders";
             cmd = new MySqlCommand(query, conn);
@@ -414,20 +425,24 @@ namespace kursBd
                 dataGridView3.DataSource = dt;
                 dataGridView3.Columns["managerid"].Visible = false;
                 dataGridView3.Columns["clientid"].Visible = false;
+                //Выборка ФИО и номера работника
                 query = "select id_empl as id, concat_ws(' ',surname,name,patronymic) as FIO from pgkurs.employees " +
                     "where positionid = (select id_pos from position_salary where name='Менеджер')";
                 cmd = new MySqlCommand(query, conn);
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
+                    //Занесение ФИО и номера работника в выпадающий список
                     manDD.Items.Add($"{dr["id"]}--{dr["FIO"]}");
                 }
                 dr.Close();
+                //Выборка ФИО и номера клиента
                 query = "select id_client as id,concat_ws(' ',surnamepred,namepred,patronymicpred) as FIO from clients";
                 cmd = new MySqlCommand(query, conn);
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
+                    //Занесение ФИО и номера клиента в выпадающий список 
                     clientDD.Items.Add($"{dr["id"]}--{dr["FIO"]}");
                 }
                 conn.Close();
@@ -442,10 +457,13 @@ namespace kursBd
 
         private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            //Проверка индекса строки
             if (e.RowIndex >= 0)
             {
+                //При выборе пустой строки может возникать ошибка парсинга
                 try
                 {
+                    //Безопасное получение даты
                     dateTimePicker1.Value = DateTime.Parse(dataGridView3.Rows[e.RowIndex].Cells["дата_подписания"].Value.ToString());
                 }
                 catch (Exception)
@@ -454,12 +472,13 @@ namespace kursBd
                 }
                 finally
                 {
+                    //Выбор соответствующего элемента выпадающего списка по номеру менеджера
                     manDD.SelectedIndex = manDD.FindString(dataGridView3.Rows[e.RowIndex].Cells["managerid"].Value.ToString());
+                    //Выбор соответствующего элемента выпадающего списка по номеру клиента
                     clientDD.SelectedIndex = clientDD.FindString(dataGridView3.Rows[e.RowIndex].Cells["clientid"].Value.ToString());
+                    //Занесение номера договора в скрытое поле для последующей работы с ним
                     numericUpDown3.Value = decimal.Parse(dataGridView3.Rows[e.RowIndex].Cells["номер_договора"].Value.ToString());
                 }
-
-
             }
         }
 
@@ -467,12 +486,14 @@ namespace kursBd
         {
             try
             {
+                //Вызов хранимой процедуры для добавления заказа
                 query = "call ordIns(@manId,@clientId,@data)";
                 cmd = new MySqlCommand(query, conn);
+                //Добавление параметров команды
                 cmd.Parameters.AddWithValue("@manId", int.Parse(manDD.SelectedItem.ToString()
-               .Substring(0, manDD.SelectedItem.ToString().IndexOf('-'))));
+               .Substring(0, manDD.SelectedItem.ToString().IndexOf('-'))));// Выбор номера менеджера из выпадающего списка
                 cmd.Parameters.AddWithValue("@clientId", int.Parse(clientDD.SelectedItem.ToString()
-               .Substring(0, clientDD.SelectedItem.ToString().IndexOf('-'))));
+               .Substring(0, clientDD.SelectedItem.ToString().IndexOf('-'))));//Выбор номера клиента из выпадающего списка
                 cmd.Parameters.AddWithValue("@data", dateTimePicker1.Value);
                 conn.Open();
                 cmd.ExecuteNonQuery();
@@ -542,35 +563,45 @@ namespace kursBd
         {
             if (e.RowIndex >= 0)
             {
-                numericUpDown4.Value = decimal.Parse(dataGridView4.Rows[e.RowIndex].Cells["номер_договора"].Value.ToString());
-                numericUpDown5.Value = decimal.Parse(dataGridView4.Rows[e.RowIndex].Cells["количество_услуг"].Value.ToString());
+                try
+                {
+                    numericUpDown4.Value = decimal.Parse(dataGridView4.Rows[e.RowIndex].Cells["номер_договора"].Value.ToString());
+                    numericUpDown5.Value = decimal.Parse(dataGridView4.Rows[e.RowIndex].Cells["количество_услуг"].Value.ToString());
+                    objDD.SelectedIndex = objDD.FindString(
+                                        obj[int.Parse(dataGridView4.Rows[e.RowIndex].Cells["номер_объекта"].Value.ToString())]);
+                    //Номер объекта=ключ по нему получаем значение и ищем это значение в дд, которое возвращает индекс
+                    servDD.SelectedIndex = servDD.FindString(
+                       serv[int.Parse(dataGridView4.Rows[e.RowIndex].Cells["номер_услуги"].Value.ToString())]);
+                }
+                catch (Exception)
+                {
 
-                objDD.SelectedIndex = objDD.FindString(
-                    obj[int.Parse(dataGridView4.Rows[e.RowIndex].Cells["номер_объекта"].Value.ToString())]);
-                //Номер объекта=ключ по нему получаем значение и ищем это значение в дд, которое возвращает индекс
-                servDD.SelectedIndex = servDD.FindString(
-                   serv[int.Parse(dataGridView4.Rows[e.RowIndex].Cells["номер_услуги"].Value.ToString())]);
+                }           
             }
         }
 
         private void updOrder_Click(object sender, EventArgs e)
         {
+            // Промежуточные таблицы для выборки данных
             DataTable srvPrice= new DataTable(),
                       srvAmount=new DataTable();
             try
             {
-                query = "select id_serv as ID,price,periodofexecution as lng from services where id_serv in (select serviceid from orderdetails where orderid=11)";
+                // Выборка номера,стоимости, времени выполнения услуг, которые соответствуют текущему договоре
+                query = "select id_serv as ID,price,periodofexecution as lng from services where id_serv in (select serviceid from orderdetails where orderid=@ordId)";
                 cmd = new MySqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@ordId", (int)numericUpDown3.Value);
                 conn.Open();
                 srvPrice.Load(cmd.ExecuteReader());
+                //Выборка номера и количества услуг в договоре
                 query = "select serviceid as ID,amountofservice as amount from orderdetails where orderid=@ordId";
                 cmd=new MySqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@ordId", (int)numericUpDown3.Value);
                 srvAmount.Load(cmd.ExecuteReader());
                 conn.Close();
+                //соединение двух таблиц по номеру услуги
                 var srvFin = from table1 in srvPrice.AsEnumerable()
-                             join table2 in srvAmount.AsEnumerable() on (int)table1["ID"] equals (int)table2["ID"]
+                             join table2 in srvAmount.AsEnumerable() on (int)table1["ID"] equals (int)table2["ID"] 
                              select new
                              {
                                  servId = (int)table1["ID"],    
@@ -578,13 +609,18 @@ namespace kursBd
                                  days = (int)table1["lng"],
                                  amount = (int)table2["amount"]
                              };
+                //переменная для суммы стоимости всех услуг
                 double sum = 0;
+                //переменная для даты выполнения договора
                 DateTime fin = dateTimePicker1.Value;
                 foreach (var item in srvFin)
                 {
+                    //суммирование стоимости
                     sum+=item.price*item.amount;
+                    //добавление дней к текущей дате для получения даты выполнения
                     fin=fin.AddDays(item.days);
                 }
+                //обновление данных в таблице
                 query = "update orders set dateofcomplete=@fin, price=@sum where id_order=@ordId";
                 cmd = new MySqlCommand(query,conn);
                 cmd.Parameters.AddWithValue("@ordId", (int)numericUpDown3.Value);
@@ -606,12 +642,14 @@ namespace kursBd
 
         private void delOrd_Click(object sender, EventArgs e)
         {
+            //Предупреждение о возможной потере данных
             if (MessageBox.Show("При удалении договора,\n" +
                "будут так же удалены связанные с ним подробности", "Удаление",
                MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
                 try
                 {
+                    //вызов хранимой процедуры
                     query = "call ordDel(@ordId)";
                     cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@ordId", (int)numericUpDown3.Value);

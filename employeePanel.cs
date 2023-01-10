@@ -118,6 +118,9 @@ namespace kursBd
             try
             {
                 dateTimePicker1.Value = DateTime.Parse(dataGridView4.Rows[e.RowIndex].Cells["дата"].Value.ToString());
+                numericUpDown4.Value = decimal.Parse(dataGridView4.Rows[e.RowIndex].Cells["id_event"].Value.ToString());
+                objDD.SelectedIndex = objDD.FindString(
+                       obj[int.Parse(dataGridView4.Rows[e.RowIndex].Cells["номер_объекта"].Value.ToString())]);
             }
             catch (Exception)
             {
@@ -125,9 +128,7 @@ namespace kursBd
             }
             finally
             {
-                numericUpDown4.Value = decimal.Parse(dataGridView4.Rows[e.RowIndex].Cells["id_event"].Value.ToString());
-                objDD.SelectedIndex = objDD.FindString(
-                       obj[int.Parse(dataGridView4.Rows[e.RowIndex].Cells["номер_объекта"].Value.ToString())]);
+                
                 eventName.Text = dataGridView4.Rows[e.RowIndex].Cells["название"].Value.ToString();
             }
         }

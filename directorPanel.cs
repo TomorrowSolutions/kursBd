@@ -105,19 +105,27 @@ namespace kursBd
         {
             if (e.RowIndex >= 0)
             {
-                numericUpDown2.Value = decimal.Parse(dataGridView2.Rows[e.RowIndex].Cells["id_empl"].Value.ToString());
-                numericUpDown1.Value = decimal.Parse(dataGridView2.Rows[e.RowIndex].Cells["номер_должности"].Value.ToString());
-                emplSName.Text = dataGridView2.Rows[e.RowIndex].Cells["фамилия"].Value.ToString();
-                emplName.Text = dataGridView2.Rows[e.RowIndex].Cells["имя"].Value.ToString();
-                emplPatr.Text = dataGridView2.Rows[e.RowIndex].Cells["отчеcтво"].Value.ToString();
-                emplEdu.Text = dataGridView2.Rows[e.RowIndex].Cells["образование"].Value.ToString();
-                dateTimePicker2.Value = DateTime.Parse(dataGridView2.Rows[e.RowIndex].Cells["дата_начала_работы"].Value.ToString());
-                emplLog.Text = dataGridView2.Rows[e.RowIndex].Cells["login"].Value.ToString();
-                emplPas.UseSystemPasswordChar = false;
-                emplPas.Text = dataGridView2.Rows[e.RowIndex].Cells["password"].Value.ToString();
-                emplPosDD.SelectedIndex = emplPosDD.FindString(getPosName((int)numericUpDown1.Value));
+                try
+                {
+                    numericUpDown2.Value = decimal.Parse(dataGridView2.Rows[e.RowIndex].Cells["id_empl"].Value.ToString());
+                    numericUpDown1.Value = decimal.Parse(dataGridView2.Rows[e.RowIndex].Cells["номер_должности"].Value.ToString());
+                    dateTimePicker2.Value = DateTime.Parse(dataGridView2.Rows[e.RowIndex].Cells["дата_начала_работы"].Value.ToString());
+                    emplPosDD.SelectedIndex = emplPosDD.FindString(getPosName((int)numericUpDown1.Value));
+                }
+                catch (Exception)
+                {
 
-
+                }
+                finally
+                {
+                    emplSName.Text = dataGridView2.Rows[e.RowIndex].Cells["фамилия"].Value.ToString();
+                    emplName.Text = dataGridView2.Rows[e.RowIndex].Cells["имя"].Value.ToString();
+                    emplPatr.Text = dataGridView2.Rows[e.RowIndex].Cells["отчеcтво"].Value.ToString();
+                    emplEdu.Text = dataGridView2.Rows[e.RowIndex].Cells["образование"].Value.ToString();
+                    emplLog.Text = dataGridView2.Rows[e.RowIndex].Cells["login"].Value.ToString();
+                    emplPas.UseSystemPasswordChar = false;
+                    emplPas.Text = dataGridView2.Rows[e.RowIndex].Cells["password"].Value.ToString();                    
+                }
             }
         }
 
@@ -260,10 +268,19 @@ namespace kursBd
         {
             if (e.RowIndex >= 0)
             {
-                numericUpDown5.Value = decimal.Parse(dataGridView3.Rows[e.RowIndex].Cells["id_pos"].Value.ToString());
-                posName.Text = dataGridView3.Rows[e.RowIndex].Cells["название"].Value.ToString();
-                posSal.Text = dataGridView3.Rows[e.RowIndex].Cells["оклад"].Value.ToString();                
+                try
+                {
+                    numericUpDown5.Value = decimal.Parse(dataGridView3.Rows[e.RowIndex].Cells["id_pos"].Value.ToString());
+                }
+                catch (Exception)
+                {
 
+                }
+                finally
+                {
+                    posName.Text = dataGridView3.Rows[e.RowIndex].Cells["название"].Value.ToString();
+                    posSal.Text = dataGridView3.Rows[e.RowIndex].Cells["оклад"].Value.ToString();
+                }
             }
         }
 
@@ -416,7 +433,6 @@ namespace kursBd
                 return;
             }
         }
-        //Связать dd c dgv
 
         private void emplServAdd_Click(object sender, EventArgs e)
         {
@@ -443,10 +459,20 @@ namespace kursBd
         {
             if (e.RowIndex >= 0)
             {
-                numericUpDown4.Value = int.Parse(dataGridView4.Rows[e.RowIndex].Cells["номер_сотрудника"].Value.ToString());
-                numericUpDown6.Value = int.Parse(dataGridView4.Rows[e.RowIndex].Cells["номер_услуги"].Value.ToString());
-                emplDD.SelectedIndex = emplDD.FindString(numericUpDown4.Value.ToString());
-                servDD.SelectedIndex = servDD.FindString(numericUpDown6.Value.ToString());
+                try
+                {
+                    numericUpDown4.Value = int.Parse(dataGridView4.Rows[e.RowIndex].Cells["номер_сотрудника"].Value.ToString());
+                    numericUpDown6.Value = int.Parse(dataGridView4.Rows[e.RowIndex].Cells["номер_услуги"].Value.ToString());
+                }
+                catch (Exception)
+                {
+
+                }
+                finally
+                {
+                    emplDD.SelectedIndex = emplDD.FindString(numericUpDown4.Value.ToString());
+                    servDD.SelectedIndex = servDD.FindString(numericUpDown6.Value.ToString());
+                }               
             }
         }
 
@@ -583,7 +609,7 @@ namespace kursBd
                         conn.Open();
                         cmd.ExecuteNonQuery();
                         conn.Close();
-                        MessageBox.Show("Данные успшено вставлены");
+                        MessageBox.Show("Данные успшено обновлены");
 
                     }
                     catch (Exception ex)
@@ -612,10 +638,20 @@ namespace kursBd
         {
             if (e.RowIndex >= 0)
             {
-                numericUpDown3.Value = decimal.Parse(dataGridView1.Rows[e.RowIndex].Cells["id_serv"].Value.ToString());
-                servName.Text = dataGridView1.Rows[e.RowIndex].Cells["название"].Value.ToString();
-                servPrice.Text = dataGridView1.Rows[e.RowIndex].Cells["стоимость"].Value.ToString();
-                servPeriod.Text = dataGridView1.Rows[e.RowIndex].Cells["время_выполнения"].Value.ToString();
+                try
+                {
+                    numericUpDown3.Value = decimal.Parse(dataGridView1.Rows[e.RowIndex].Cells["id_serv"].Value.ToString());
+                }
+                catch (Exception)
+                {
+
+                }
+                finally
+                {
+                    servName.Text = dataGridView1.Rows[e.RowIndex].Cells["название"].Value.ToString();
+                    servPrice.Text = dataGridView1.Rows[e.RowIndex].Cells["стоимость"].Value.ToString();
+                    servPeriod.Text = dataGridView1.Rows[e.RowIndex].Cells["время_выполнения"].Value.ToString();
+                }                
             }
         }
 

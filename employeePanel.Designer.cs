@@ -40,7 +40,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.helloLabel = new System.Windows.Forms.Label();
             this.eventsTab = new System.Windows.Forms.TabPage();
+            this.eventUpd = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.eventName = new System.Windows.Forms.TextBox();
             this.label37 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
@@ -54,9 +57,6 @@
             this.selectEvents = new System.Windows.Forms.Button();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
             this.label35 = new System.Windows.Forms.Label();
-            this.eventName = new System.Windows.Forms.TextBox();
-            this.eventUpd = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.tabControl1.SuspendLayout();
             this.infoTab.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -197,6 +197,16 @@
             this.eventsTab.TabIndex = 1;
             this.eventsTab.Text = "События";
             // 
+            // eventUpd
+            // 
+            this.eventUpd.Location = new System.Drawing.Point(427, 493);
+            this.eventUpd.Name = "eventUpd";
+            this.eventUpd.Size = new System.Drawing.Size(100, 50);
+            this.eventUpd.TabIndex = 83;
+            this.eventUpd.Text = "Обновить";
+            this.eventUpd.UseVisualStyleBackColor = true;
+            this.eventUpd.Click += new System.EventHandler(this.eventUpd_Click);
+            // 
             // panel6
             // 
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -213,15 +223,29 @@
             this.panel6.Size = new System.Drawing.Size(549, 252);
             this.panel6.TabIndex = 82;
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(258, 191);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(286, 22);
+            this.dateTimePicker1.TabIndex = 78;
+            // 
+            // eventName
+            // 
+            this.eventName.Location = new System.Drawing.Point(258, 134);
+            this.eventName.Name = "eventName";
+            this.eventName.Size = new System.Drawing.Size(286, 22);
+            this.eventName.TabIndex = 77;
+            // 
             // label37
             // 
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label37.Location = new System.Drawing.Point(14, 42);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(149, 20);
+            this.label37.Size = new System.Drawing.Size(140, 20);
             this.label37.TabIndex = 76;
-            this.label37.Text = "Номер договора";
+            this.label37.Text = "Номер события";
             // 
             // label30
             // 
@@ -350,30 +374,6 @@
             this.label35.Size = new System.Drawing.Size(607, 35);
             this.label35.TabIndex = 75;
             this.label35.Text = "Просмотр информации из базы данных\r\n";
-            // 
-            // eventName
-            // 
-            this.eventName.Location = new System.Drawing.Point(258, 134);
-            this.eventName.Name = "eventName";
-            this.eventName.Size = new System.Drawing.Size(286, 22);
-            this.eventName.TabIndex = 77;
-            // 
-            // eventUpd
-            // 
-            this.eventUpd.Location = new System.Drawing.Point(427, 493);
-            this.eventUpd.Name = "eventUpd";
-            this.eventUpd.Size = new System.Drawing.Size(100, 50);
-            this.eventUpd.TabIndex = 83;
-            this.eventUpd.Text = "Обновить";
-            this.eventUpd.UseVisualStyleBackColor = true;
-            this.eventUpd.Click += new System.EventHandler(this.eventUpd_Click);
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(258, 191);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(286, 22);
-            this.dateTimePicker1.TabIndex = 78;
             // 
             // employeePanel
             // 

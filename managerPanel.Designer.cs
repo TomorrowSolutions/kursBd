@@ -85,7 +85,6 @@
             this.label20 = new System.Windows.Forms.Label();
             this.objCity = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.objName = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
@@ -679,7 +678,6 @@
             this.panel3.Controls.Add(this.label20);
             this.panel3.Controls.Add(this.objCity);
             this.panel3.Controls.Add(this.label21);
-            this.panel3.Controls.Add(this.label24);
             this.panel3.Controls.Add(this.numericUpDown2);
             this.panel3.Controls.Add(this.objName);
             this.panel3.Controls.Add(this.label26);
@@ -739,22 +737,13 @@
             this.label21.TabIndex = 21;
             this.label21.Text = "Город";
             // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label24.Location = new System.Drawing.Point(15, 30);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(104, 20);
-            this.label24.TabIndex = 15;
-            this.label24.Text = "ID Объекта";
-            // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(150, 31);
+            this.numericUpDown2.Location = new System.Drawing.Point(3, 3);
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(58, 22);
             this.numericUpDown2.TabIndex = 14;
+            this.numericUpDown2.Visible = false;
             // 
             // objName
             // 
@@ -811,7 +800,6 @@
             this.OrderTab.Controls.Add(this.panel5);
             this.OrderTab.Controls.Add(this.orderHelp);
             this.OrderTab.Controls.Add(this.delOrd);
-            this.OrderTab.Controls.Add(this.numericUpDown3);
             this.OrderTab.Controls.Add(this.updOrder);
             this.OrderTab.Controls.Add(this.addOrder);
             this.OrderTab.Controls.Add(this.label10);
@@ -831,6 +819,7 @@
             this.panel5.Controls.Add(this.label29);
             this.panel5.Controls.Add(this.dateTimePicker1);
             this.panel5.Controls.Add(this.clientDD);
+            this.panel5.Controls.Add(this.numericUpDown3);
             this.panel5.Controls.Add(this.label25);
             this.panel5.Controls.Add(this.manDD);
             this.panel5.Controls.Add(this.label27);
@@ -919,7 +908,7 @@
             // 
             // numericUpDown3
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(32, 514);
+            this.numericUpDown3.Location = new System.Drawing.Point(3, 3);
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(58, 22);
             this.numericUpDown3.TabIndex = 14;
@@ -1299,7 +1288,6 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox objCity;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label24;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.TextBox objName;
         private System.Windows.Forms.Label label26;

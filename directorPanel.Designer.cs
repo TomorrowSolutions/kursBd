@@ -156,8 +156,6 @@
             // 
             this.emplServTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(218)))), ((int)(((byte)(226)))));
             this.emplServTab.Controls.Add(this.panel4);
-            this.emplServTab.Controls.Add(this.numericUpDown6);
-            this.emplServTab.Controls.Add(this.numericUpDown4);
             this.emplServTab.Controls.Add(this.label32);
             this.emplServTab.Controls.Add(this.label33);
             this.emplServTab.Controls.Add(this.emplServDelete);
@@ -175,7 +173,9 @@
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.servDD);
+            this.panel4.Controls.Add(this.numericUpDown6);
             this.panel4.Controls.Add(this.label11);
+            this.panel4.Controls.Add(this.numericUpDown4);
             this.panel4.Controls.Add(this.emplDD);
             this.panel4.Controls.Add(this.label12);
             this.panel4.Location = new System.Drawing.Point(688, 150);
@@ -223,7 +223,7 @@
             // 
             // numericUpDown6
             // 
-            this.numericUpDown6.Location = new System.Drawing.Point(87, 508);
+            this.numericUpDown6.Location = new System.Drawing.Point(67, 3);
             this.numericUpDown6.Name = "numericUpDown6";
             this.numericUpDown6.Size = new System.Drawing.Size(58, 22);
             this.numericUpDown6.TabIndex = 16;
@@ -231,7 +231,7 @@
             // 
             // numericUpDown4
             // 
-            this.numericUpDown4.Location = new System.Drawing.Point(23, 508);
+            this.numericUpDown4.Location = new System.Drawing.Point(3, 3);
             this.numericUpDown4.Name = "numericUpDown4";
             this.numericUpDown4.Size = new System.Drawing.Size(58, 22);
             this.numericUpDown4.TabIndex = 14;

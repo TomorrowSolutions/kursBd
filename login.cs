@@ -19,35 +19,46 @@ namespace kursBd
         {
             InitializeComponent();
         }
+        //Строка подключение гостя, для аутентификации сотрудников
         private string visitorConnString = "server=localhost;uid=visitor;pwd=1;database=pgkurs";
+        //Строка подключения директора, так как он является единственным пользователем этой учетной записи
         private string directorConnString = String.Empty;
         private MySqlConnection conn;
         private string query;
         private MySqlCommand cmd;
         MySqlDataReader reader;
+        //Метод для открытия панели менеджера и передачи сопутсвующей информации
         private void openManPage(string conn, int id, List<string> list) => Application.Run(new managerPanel(conn,id,list));
+        //Метод для открытия панели работника и передачи сопутсвующей информации
         private void openEmplPage(string conn,int id, List<string> list) => Application.Run(new employeePanel(conn,id,list));
+        //Метод для открытия панели директора
         private void openDirPage(string conn) => Application.Run(new directorPanel(conn));
+        //Метод для получения информации о менеджере
         private List<string> getManInfo(int manId)
         {
             List<string> list = new List<string>();
+            //Получение строки с именем и фамилией
             query = $"select concat_ws(' ',name,patronymic) as namepatr from employees where id_empl={manId}";
             cmd = new MySqlCommand(query, conn);
             conn.Open();
             list.Add(cmd.ExecuteScalar().ToString());
+            //Получение строки с информацией об окладе
             query = "select salary from position_salary where name='Менеджер'";
             cmd = new MySqlCommand(query, conn);
             list.Add(cmd.ExecuteScalar().ToString());
             conn.Close();
             return list;
         }
+        //Метод для получения информации о сотруднике
         private List<string> getEmplInfo(int emplId)
         {
             List<string> list = new List<string>();
+            //Получение строки с именем и фамилией
             query = $"select concat_ws(' ',name,patronymic) as namepatr from employees where id_empl={emplId}";
             cmd = new MySqlCommand(query, conn);
             conn.Open();
             list.Add(cmd.ExecuteScalar().ToString());
+            //Получение строки с информацией об окладе
             query = $"select salary from position_salary where id_pos=(select positionid from employees where id_empl={emplId})";
             cmd = new MySqlCommand(query, conn);
             list.Add(cmd.ExecuteScalar().ToString());
@@ -58,18 +69,20 @@ namespace kursBd
         private void loginBtn_Click(object sender, EventArgs e)
         {
             Thread thr;
-
+            //проверка типа учетной записи 
             if (emplRadio.Checked)                
             {
-                loginTb.Text = "LosevAA"; passwordTb.Text = "xz85";
+                //loginTb.Text = "LosevAA"; passwordTb.Text = "xz85";
                 //loginTb.Text = "Petr"; passwordTb.Text = "abc123";
+                //Выборка номера работника, должности с заданными логином и паролем
                 query = String.Format("select id_empl as id, positionid as pos from pgkurs.employees where login='{0}' and password='{1}'",
                                      loginTb.Text, passwordTb.Text);
             }
             else if (dirRadio.Checked)
             {
                 loginTb.Text = "director";passwordTb.Text = "admin";
-                directorConnString= "server=localhost;uid=director;pwd=admin;database=pgkurs";
+                //Задние строки подключения директора с заданными логином и паролем
+                directorConnString= $"server=localhost;uid={loginTb.Text};pwd={passwordTb.Text};database=pgkurs";
                 query = "select * from pgkurs.employees";
             }
             else
@@ -77,16 +90,21 @@ namespace kursBd
                 MessageBox.Show("Не выбран тип учетной записи!");
                 return;
             }
+            //Обработка в зависимости от типа учетной записи
             if (emplRadio.Checked )
             {
+                //Создание нового подключения под учетной записью гостя
                 conn = new MySqlConnection(visitorConnString);
                 try
                 {
+                    //Переменные для получения данных
                     int id=0, posId = 0,manPosId=0;
                     conn.Open();
                     cmd = new MySqlCommand(query,conn);
                     reader = cmd.ExecuteReader();
+                    //Переменная для проверки авторизации 
                     bool isLogin = false;
+                    //Парсинг значений id 
                     while (reader.Read())
                     {
                        isLogin = int.TryParse(reader["id"].ToString(), out id) &&
@@ -142,7 +160,7 @@ namespace kursBd
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ошибка!"+Environment.NewLine+ex.Message);
+                    MessageBox.Show("Не удалось авторизоваться.");
                     return ;
                 }
             }
